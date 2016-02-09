@@ -1,5 +1,4 @@
-﻿Imports MysteryStates
-''' <summary>
+﻿''' <summary>
 ''' 引擎实现的粒子系统一定是继承这个类的，但外部实现的不一定。
 ''' </summary>
 ''' <typeparam name="TParticle"></typeparam>
@@ -12,8 +11,6 @@ Public MustInherit Class ParticleSystem(Of TParticle As IParticle)
     Public MustOverride Property SpawnDuration As Integer Implements IPartialSystem(Of TParticle).SpawnDuration
     Public MustOverride Property SpawnInterval As Integer Implements IPartialSystem(Of TParticle).SpawnInterval
     Protected MustOverride Function CreateParticle() As TParticle
-    Public Event RequestRemoveFromVisualTree(sender As AnimatedVisual) Implements IPartialSystem(Of TParticle).RequestRemoveFromVisualTree
-
     Public Overrides Sub Update(sender As GamePanel)
         MyBase.Update(sender)
         If SpawnDuration >= 0 Then
@@ -25,7 +22,7 @@ Public MustInherit Class ParticleSystem(Of TParticle As IParticle)
             SpawnDuration -= 1
         Else
             If Particles.Count = 0 Then
-                RaiseEvent RequestRemoveFromVisualTree(Me)
+                IsStopped = True
             End If
         End If
         Dim deq = 0

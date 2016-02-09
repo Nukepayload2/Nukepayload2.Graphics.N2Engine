@@ -15,8 +15,4 @@
     ''' 释放多少帧
     ''' </summary>
     Property SpawnDuration%
-    ''' <summary>
-    ''' 此粒子系统声明周期已到，需要从可视元素树中删除。
-    ''' </summary>
-    Event RequestRemoveFromVisualTree(sender As AnimatedVisual)
 End Interface

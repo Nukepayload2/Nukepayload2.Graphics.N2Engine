@@ -45,21 +45,10 @@ Public MustInherit Class GamePanel
         For Each anim In AnimObjects
             anim.Update(Me)
         Next
-        For Each garb In RemovedAnimations
+        For Each garb In Aggregate anim In AnimObjects Where anim.IsStopped Into ToArray
             Debug.WriteLine("移除粒子系统：" & garb.GetType.Name)
             AnimObjects.Remove(garb)
         Next
-        RemovedAnimations.Clear()
-    End Sub
-    ''' <summary>
-    ''' 用于回收播放完毕的粒子
-    ''' </summary>
-    Protected RemovedAnimations As New List(Of AnimatedVisual)
-    ''' <summary>
-    ''' 回收播放完毕的粒子
-    ''' </summary>
-    Protected Sub CollectUsedAnimation(Anim As AnimatedVisual)
-        RemovedAnimations.Add(Anim)
     End Sub
     Protected Overridable Sub DisposeCustomObjects()
 
