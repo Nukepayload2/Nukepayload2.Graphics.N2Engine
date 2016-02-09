@@ -25,9 +25,9 @@ Public MustInherit Class GamePanel
     Public Sub Add(obj As GameVisual)
         If obj Is Nothing Then Throw New ArgumentNullException(NameOf(obj))
         If obj.GetType.IsAssignableFrom(GetType(StaticVisual)) Then
-            StaticObjects.Add(obj)
+            StaticObjects.Add(DirectCast(obj, StaticVisual))
         ElseIf obj.GetType.IsAssignableFrom(GetType(AnimatedVisual)) Then
-            AnimObjects.Add(obj)
+            AnimObjects.Add(DirectCast(obj, AnimatedVisual))
         Else
             Throw New ArgumentException("类型不是AnimatedVisual也不是StaticVisual")
         End If

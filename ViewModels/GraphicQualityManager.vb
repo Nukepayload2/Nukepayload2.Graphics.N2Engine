@@ -1,4 +1,5 @@
-﻿Public Class GraphicQualityManager
+﻿Option Strict Off
+Public Class GraphicQualityManager
     Public Shared ReadOnly Property Current As GraphicQualityManager
     Public Shared Event QualityChanged(Quality As GraphicQualityManager)
     Sub New()

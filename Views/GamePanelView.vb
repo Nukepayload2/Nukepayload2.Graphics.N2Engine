@@ -40,14 +40,14 @@ Public MustInherit Class GamePanelView
 
     Protected MustOverride Function InitializeImageManager(creator As ICanvasResourceCreator) As GameResourceManager(Of Integer, ICanvasImage)
 
-    Private Sub AnimatedCanvas_Draw(sender As CanvasAnimatedControl, args As CanvasAnimatedDrawEventArgs) Handles AnimatedCanvas.Draw
+    Private Sub AnimatedCanvas_Draw(sender As ICanvasAnimatedControl, args As CanvasAnimatedDrawEventArgs) Handles AnimatedCanvas.Draw
         Try
             DrawAnim(sender, args)
         Catch ex As Exception
         End Try
     End Sub
 
-    Dim DrawAnim As New Action(Of CanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
+    Dim DrawAnim As New Action(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
         Sub(sender, args)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
             Using lck = sender.Device.Lock

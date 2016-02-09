@@ -1,4 +1,5 @@
-﻿Public MustInherit Class GamePanelScrollViewer
+﻿Option Strict Off
+Public MustInherit Class GamePanelScrollViewer
     Inherits GamePanelView
     Public ReadOnly Property MinimapImageManager As GameResourceManager(Of Integer, ICanvasImage)
     WithEvents MinimapCanvas As CanvasAnimatedContainer
@@ -21,7 +22,7 @@
         Content = Scroller
     End Sub
 
-    Dim DrawMinimap As New TypedEventHandler(Of CanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
+    Dim DrawMinimap As New TypedEventHandler(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
         Sub(sender, args)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
             Try
@@ -111,7 +112,7 @@
                                End Function).Invoke.AsAsyncAction)
     End Sub
 
-    Private Sub MinimapCanvas_Draw(sender As CanvasAnimatedControl, args As CanvasAnimatedDrawEventArgs) Handles MinimapCanvas.Draw
+    Private Sub MinimapCanvas_Draw(sender As ICanvasAnimatedControl, args As CanvasAnimatedDrawEventArgs) Handles MinimapCanvas.Draw
         DrawMinimap(sender, args)
     End Sub
 End Class

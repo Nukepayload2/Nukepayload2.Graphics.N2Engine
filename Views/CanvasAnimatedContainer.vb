@@ -4,14 +4,14 @@
     Sub New()
         Content = AnimControl
     End Sub
-    Public Event Draw As TypedEventHandler(Of CanvasAnimatedControl, CanvasAnimatedDrawEventArgs)
+    Public Event Draw As TypedEventHandler(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)
     Public Event CreateResources As TypedEventHandler(Of CanvasAnimatedControl, CanvasCreateResourcesEventArgs)
     Public ReadOnly Property Canvas As CanvasAnimatedControl
         Get
             Return AnimControl
         End Get
     End Property
-    Sub OnDraw(snd As CanvasAnimatedControl, ev As CanvasAnimatedDrawEventArgs) Handles AnimControl.Draw
+    Sub OnDraw(snd As ICanvasAnimatedControl, ev As CanvasAnimatedDrawEventArgs) Handles AnimControl.Draw
         RaiseEvent Draw(snd, ev)
     End Sub
     Private Sub Win2DContainer_Unloaded(sender As Object, e As RoutedEventArgs) Handles Me.Unloaded

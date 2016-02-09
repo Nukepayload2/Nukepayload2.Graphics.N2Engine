@@ -1,4 +1,5 @@
-﻿Public Module Vector2Extensions
+﻿Option Strict Off
+Public Module Vector2Extensions
     <Extension>
     Public Sub LimitMag(ByRef this As Vector2, lUponNum As Single)
         Dim tempMag As Single = this.Length

@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Graphics.Canvas
+﻿Option Strict Off
+
 Imports Windows.Graphics.Imaging
 
 Module UIElementExtensions

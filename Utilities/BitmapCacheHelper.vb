@@ -1,6 +1,4 @@
-﻿Imports Microsoft.Graphics.Canvas
-Imports Windows.UI
-
+﻿Option Strict Off
 Public Class BitmapCacheHelper
     Public Shared Function CacheImage(DrawingSession As CanvasDrawingSession, Source As ICanvasImage) As CanvasBitmap
         Dim reg = Source.GetBounds(DrawingSession)

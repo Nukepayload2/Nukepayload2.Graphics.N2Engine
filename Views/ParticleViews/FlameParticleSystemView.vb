@@ -1,4 +1,7 @@
-﻿Friend Class FlameParticleSystemView
+﻿Option Strict Off
+Imports Microsoft.Graphics.Canvas.Geometry
+
+Public Class FlameParticleSystemView
     Inherits TypedGameVisualPresenter(Of FlameParticleSystem)
     Public Sub New(flamePartialSystem As FlameParticleSystem)
         MyBase.New(flamePartialSystem)
@@ -50,8 +53,13 @@
                         .Amount = 40.0F
                     },
                     .TransformMatrix = Matrix3x2.CreateScale(1, 2, centerPoint)}
-                    ds.DrawCircle(part.Location, CurFlameSize, Colors.White)
-                    DrawingSession.DrawImage(FlameEffect)
+                    'Dim pathb As New CanvasPathBuilder(ds)
+                    'pathb.BeginFigure(New Vector2(CurFlameSize / 2, 0))
+                    'pathb.AddCubicBezier(New Vector2(0, CurFlameSize * 2), New Vector2(CurFlameSize, CurFlameSize * 2), New Vector2(CurFlameSize / 2, 0))
+                    'pathb.EndFigure(CanvasFigureLoop.Closed)
+                    'ds.FillGeometry(CanvasGeometry.CreatePath(pathb), New Vector2(CurFlameSize / 2, 0), Colors.White)
+                    ds.FillCircle(New Vector2, CurFlameSize, Colors.White)
+                    DrawingSession.DrawImage(FlameEffect, part.Location)
                 End Using
             End Using
         Next

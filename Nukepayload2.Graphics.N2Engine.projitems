@@ -43,4 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\SparkParticleSystemView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TypedGameVisualView.vb" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)README.md" />
+  </ItemGroup>
 </Project>

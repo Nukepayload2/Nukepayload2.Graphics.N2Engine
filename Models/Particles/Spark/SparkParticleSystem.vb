@@ -1,4 +1,4 @@
-﻿Imports MysteryStates
+﻿Option Strict Off
 ''' <summary>
 ''' 火花粒子系统
 ''' </summary>
