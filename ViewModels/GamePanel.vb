@@ -42,9 +42,11 @@ Public MustInherit Class GamePanel
     Protected MustOverride Sub InitializeGameVisuals()
     Public Overridable Sub Update()
         RaiseEvent Updating()
-        For Each anim In AnimObjects
-            anim.Update(Me)
-        Next
+        SyncLock AnimObjects
+            For Each anim In AnimObjects
+                anim.Update(Me)
+            Next
+        End SyncLock
         For Each garb In Aggregate anim In AnimObjects Where anim.IsStopped Into ToArray
             Debug.WriteLine("移除粒子系统：" & garb.GetType.Name)
             AnimObjects.Remove(garb)

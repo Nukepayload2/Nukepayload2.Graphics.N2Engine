@@ -12,34 +12,35 @@ Public MustInherit Class SparkParticleSystem
     Public Overrides Property SpawnDuration As Integer = Integer.MaxValue
     Public Overrides Property SpawnInterval As Integer = 1
 
-    Sub New(x As Single, y As Single, PartialNum As Integer)
-        For i = 0 To PartialNum - 1
+    Sub New(Location As Vector2, ParticleCount As Integer)
+        Me.Location = Location
+        For i = 0 To ParticleCount - 1
             Dim p = CreateParticle()
             p.Age = i
+            p.Location = Location
             Particles.Enqueue(p)
         Next
     End Sub
 
-    Shared Rnd As New Random
-    Dim Directions() As Vector2 = {New Vector2(0, 1), New Vector2(0, -1), New Vector2(-1, 0), New Vector2(1, 0), New Vector2(0.7, 0.7), New Vector2(0.7, -0.7), New Vector2(-0.7, 0.7), New Vector2(-0.7, -0.7)}
+    Protected Shared Rnd As New Random
+    Protected Shared Directions() As Vector2 = {New Vector2(0, 1), New Vector2(0, -1), New Vector2(-1, 0), New Vector2(1, 0), New Vector2(0.7, 0.7), New Vector2(0.7, -0.7), New Vector2(-0.7, 0.7), New Vector2(-0.7, -0.7)}
 
     Protected Overrides Function CreateParticle() As SparkParticle
         Dim s As New SparkParticle(Directions(Rnd.Next(8)).RotateNew(Rnd.Next(60)) * Rnd.NextDouble, 400, Location, New Vector2) With
         {
             .Age = Rnd.NextDouble * 80,
-            .Size = Rnd.Next(1, 4),
-            .SparkSize = 1 + Rnd.NextDouble * 9,
+            .SparkSize = 1 + Rnd.NextDouble * 3,
             .SparkColor = Color.FromArgb(10 + Rnd.NextDouble * 245, 255, 255, 255)
         }
         Return s
     End Function
     Public Overrides Sub Update(sender As GamePanel)
         MyBase.Update(sender)
-        DeflectPartials(sender)
+        DeflectParticles(sender)
     End Sub
     ''' <summary>
     ''' 在粒子需要偏转的时候调用。控制粒子额外的运动形态。
     ''' </summary>
     ''' <param name="sender"></param>
-    Protected MustOverride Sub DeflectPartials(sender As GamePanel)
+    Protected MustOverride Sub DeflectParticles(sender As GamePanel)
 End Class

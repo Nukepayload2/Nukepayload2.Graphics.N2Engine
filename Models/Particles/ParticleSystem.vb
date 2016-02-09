@@ -28,7 +28,7 @@ Public MustInherit Class ParticleSystem(Of TParticle As IParticle)
         Dim deq = 0
         For Each par In Particles
             par.Update()
-            If par.Age > par.LifeTime Then
+            If par.Age >= par.LifeTime Then
                 deq += 1
             End If
         Next

@@ -53,9 +53,11 @@ Public MustInherit Class GamePanelView
             Using lck = sender.Device.Lock
                 Using cl = New CanvasCommandList(args.DrawingSession)
                     Using ds = cl.CreateDrawingSession
-                        For Each a In Panel.AnimObjects
-                            a.Presenter.OnDraw(Me, ds)
-                        Next
+                        SyncLock Panel
+                            For Each a In Panel.AnimObjects
+                                a.Presenter.OnDraw(Me, ds)
+                            Next
+                        End SyncLock
                     End Using
                     args.DrawingSession.DrawImage(cl)
                 End Using

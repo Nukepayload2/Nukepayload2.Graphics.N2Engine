@@ -4,7 +4,6 @@
         MyBase.New(acceleration, lifeTime, location, velocity)
     End Sub
     Public Property Mass As Single = 10.0 '质量大小
-    Public Property Size As Single = 1
     Public Property SparkSize As Single = 1 '粒子图像的大小
     Public Property SparkColor As Color '粒子颜色
     Public Property MaxSpeed! = 5
