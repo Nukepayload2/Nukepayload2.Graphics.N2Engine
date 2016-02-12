@@ -46,18 +46,17 @@ Public MustInherit Class GamePanelView
         Catch ex As Exception
         End Try
     End Sub
-
+    Public ReadOnly Property Timing As CanvasTimingInformation?
     Dim DrawAnim As New Action(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
         Sub(sender, args)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
+            _Timing = New CanvasTimingInformation?(args.Timing)
             Using lck = sender.Device.Lock
                 Using cl = New CanvasCommandList(args.DrawingSession)
                     Using ds = cl.CreateDrawingSession
-                        SyncLock Panel
-                            For Each a In Panel.AnimObjects
-                                a.Presenter.OnDraw(Me, ds)
-                            Next
-                        End SyncLock
+                        For Each a In Panel.AnimObjects
+                            a.Presenter.OnDraw(Me, ds)
+                        Next
                     End Using
                     args.DrawingSession.DrawImage(cl)
                 End Using
@@ -117,6 +116,7 @@ Public MustInherit Class GamePanelView
                 AnimatedImageManager.Dispose()
                 StaticImageManager.Dispose()
                 Panel.Dispose()
+                _Timing = New CanvasTimingInformation?
             End If
 
             ' TODO: 释放未托管资源(未托管对象)并在以下内容中替代 Finalize()。

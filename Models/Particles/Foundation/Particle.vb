@@ -1,4 +1,5 @@
-﻿''' <summary>
+﻿Imports 红警杀手机版
+''' <summary>
 ''' 引擎实现的粒子一定是继承这个类的，但外部实现的不一定。
 ''' </summary>
 Public Class Particle
@@ -14,6 +15,9 @@ Public Class Particle
     Public ReadOnly Property LifeTime As Integer Implements IParticle.LifeTime
     Public Property Location As Vector2 Implements IParticle.Location
     Public Property Velocity As Vector2 Implements IParticle.Velocity
+
+    Public Property Warhead As Warhead Implements IParticle.Warhead
+    Public Property Damage As Single Implements IParticle.Damage
 
     Public Overridable Sub Update() Implements IParticle.Update
         Age += 1

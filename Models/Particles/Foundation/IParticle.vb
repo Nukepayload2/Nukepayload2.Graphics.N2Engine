@@ -3,6 +3,16 @@
 ''' </summary>
 Public Interface IParticle
     ''' <summary>
+    ''' 造成伤害（如果有）
+    ''' </summary>
+    ''' <returns></returns>
+    Property Damage!
+    ''' <summary>
+    ''' 用于计算伤害的弹头，不包括弹头的动画
+    ''' </summary>
+    ''' <returns></returns>
+    Property Warhead As Warhead
+    ''' <summary>
     ''' 位置
     ''' </summary>
     Property Location As Vector2

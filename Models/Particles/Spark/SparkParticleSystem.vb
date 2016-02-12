@@ -4,7 +4,7 @@
 ''' </summary>
 Public MustInherit Class SparkParticleSystem
     Inherits ParticleSystem(Of SparkParticle)
-    Implements IPartialSystem(Of SparkParticle)
+    Implements IParticleSystem(Of SparkParticle)
 
     Public Overrides ReadOnly Property Presenter As GameVisualView = New SparkParticleSystemView(Me)
     Public Overrides Property Particles As New Queue(Of SparkParticle)

@@ -8,7 +8,7 @@ Public MustInherit Class AnimatedVisual
         Get
             Return _IsStopped
         End Get
-        Protected Set(value As Boolean)
+        Friend Set(value As Boolean)
             _IsStopped = value
         End Set
     End Property

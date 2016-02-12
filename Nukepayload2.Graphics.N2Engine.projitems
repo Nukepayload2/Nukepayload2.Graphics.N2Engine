@@ -10,14 +10,30 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\AnimatedVisual.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Animation\LoopInformation.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Animation\BitmapAnimation.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Animation\DynamicBitmapAnimation.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Animation\Trailer.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Audio\AudioResource.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Ammor.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\BattleUnit.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Projectile.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Warhead.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Weapon.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\ProjectileTrack.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GameVisual.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GraphicQualityOptions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Flame\FlameParticle.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Flame\FlameParticleSystem.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\IParticle.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\IParticleSystem.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\ParticleSystem.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Particle.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Foundation\ImageParticle.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Foundation\IParticle.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Foundation\IParticleSystem.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Foundation\Particle.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Foundation\ParticleSystem.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Gas\GasParticle.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Gas\GasParticleSystem.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Railgun\RailgunParticle.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Railgun\RailgunParticleSystem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Spark\SparkParticle.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Spark\SparkParticleSystem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\StaticVisual.vb" />
@@ -33,6 +49,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GameResourceManager.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GraphicQualityManager.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IGameResourceManager.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\AnimationViews\BitmapAnimationView.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\AnimationViews\ProjectileTrackView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CanvasAnimatedContainer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CanvasContainer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DynamicGameVisualView.vb" />
@@ -40,10 +58,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\GamePanelView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\GameVisualView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\FlameParticleSystemView.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\GasParticleSystemView.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\RailgunParticleSystemView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\SparkParticleSystemView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TypedGameVisualView.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Particles\Beam\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Particles\Bolt\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Particles\Storm\" />
   </ItemGroup>
 </Project>

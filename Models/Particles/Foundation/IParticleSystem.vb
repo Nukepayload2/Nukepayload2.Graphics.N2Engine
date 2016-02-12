@@ -1,4 +1,4 @@
-﻿Public Interface IPartialSystem(Of TParticle As IParticle)
+﻿Public Interface IParticleSystem(Of TParticle As IParticle)
     ''' <summary>
     ''' 关联哪种粒子
     ''' </summary>

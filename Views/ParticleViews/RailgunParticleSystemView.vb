@@ -1,13 +1,13 @@
-﻿Public Class SparkParticleSystemView
-    Inherits TypedGameVisualPresenter(Of SparkParticleSystem)
-    Sub New(Target As SparkParticleSystem)
+﻿Public Class RailgunParticleSystemView
+    Inherits TypedGameVisualPresenter(Of RailgunParticleSystem)
+    Sub New(Target As RailgunParticleSystem)
         MyBase.New(Target)
     End Sub
     Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
         '绘制当前粒子系统的代码
         Using cl As New CanvasCommandList(DrawingSession), ds = cl.CreateDrawingSession
             For Each part In Target.Particles
-                ds.FillCircle(part.Location, part.SparkSize, part.SparkColor)
+                ds.FillCircle(part.Location, 1, part.Foreground)
             Next
             DrawingSession.DrawImage(cl)
         End Using

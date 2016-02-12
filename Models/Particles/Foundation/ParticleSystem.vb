@@ -4,12 +4,12 @@
 ''' <typeparam name="TParticle"></typeparam>
 Public MustInherit Class ParticleSystem(Of TParticle As IParticle)
     Inherits AnimatedVisual
-    Implements IPartialSystem(Of TParticle)
+    Implements IParticleSystem(Of TParticle)
 
-    Public MustOverride Property Particles As Queue(Of TParticle) Implements IPartialSystem(Of TParticle).Particles
-    Public MustOverride Property SpawnCount As Integer Implements IPartialSystem(Of TParticle).SpawnCount
-    Public MustOverride Property SpawnDuration As Integer Implements IPartialSystem(Of TParticle).SpawnDuration
-    Public MustOverride Property SpawnInterval As Integer Implements IPartialSystem(Of TParticle).SpawnInterval
+    Public MustOverride Property Particles As Queue(Of TParticle) Implements IParticleSystem(Of TParticle).Particles
+    Public MustOverride Property SpawnCount As Integer Implements IParticleSystem(Of TParticle).SpawnCount
+    Public MustOverride Property SpawnDuration As Integer Implements IParticleSystem(Of TParticle).SpawnDuration
+    Public MustOverride Property SpawnInterval As Integer Implements IParticleSystem(Of TParticle).SpawnInterval
     Protected MustOverride Function CreateParticle() As TParticle
     Public Overrides Sub Update(sender As GamePanel)
         MyBase.Update(sender)
