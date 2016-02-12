@@ -13,11 +13,11 @@
     ''' </summary>
     Public Property Ammor As Ammor
     ''' <summary>
-    ''' 产生的粒子
+    ''' 正常工作时产生的粒子系统
     ''' </summary>
     Public Property NormalParticleSystems As ParticleSystem(Of IParticle)
     ''' <summary>
-    ''' 受伤的时候产生的粒子
+    ''' 受伤的时候产生的粒子系统
     ''' </summary>
     Public Property DamageParticleSystems As ParticleSystem(Of IParticle)
     ''' <summary>
