@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Animation\BitmapAnimation.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Animation\DynamicBitmapAnimation.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Animation\Trailer.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Audio\AudioResource.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Ammor.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\BattleUnit.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Projectile.vb" />
