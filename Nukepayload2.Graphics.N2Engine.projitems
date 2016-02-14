@@ -39,6 +39,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\ViewAeraRectangleView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ViewingAeraRectangle.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\BitmapCacheHelper.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameObjectsHelper.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameHitTestFilterBehavior.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameHitTestResultBehavior.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameHitTestTestParameter.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GamePointHitTestParameter.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameRayHitTestParameters.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\UIElementExtensions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Vector2Extensions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\WaitTask.vb" />
