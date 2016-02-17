@@ -1,5 +1,4 @@
-﻿Imports 红警杀手机版
-''' <summary>
+﻿''' <summary>
 ''' 引擎实现的粒子一定是继承这个类的，但外部实现的不一定。
 ''' </summary>
 Public Class Particle

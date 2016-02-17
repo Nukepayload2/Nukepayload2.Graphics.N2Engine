@@ -1,6 +1,4 @@
-﻿Imports 红警杀手机版
-
-Public Class BitmapAnimationView
+﻿Public Class BitmapAnimationView
     Inherits TypedGameVisualPresenter(Of BitmapAnimation)
     Sub New(target As BitmapAnimation)
         MyBase.New(target)
@@ -9,12 +7,11 @@ Public Class BitmapAnimationView
         Using cl = New CanvasCommandList(DrawingSession), ds = cl.CreateDrawingSession
             Dim OriginalImage = Target.Frames(Target.GetImageIndex(Target.FrameCount))
             Dim CurImg As ICanvasImage = OriginalImage
-            If Target.Effect IsNot Nothing Then
+            If Target.ApplyEffect IsNot Nothing Then
                 If Target.Perspective.HasValue Then
                     Throw New InvalidOperationException($"如果指定了{NameOf(Target.Perspective)}, 则不能使用Effect。")
                 End If
-                Target.SetEffectSource.Invoke(CurImg)
-                CurImg = Target.Effect
+                CurImg = Target.ApplyEffect(CurImg, DrawingSession)
             End If
             If Target.Transform.HasValue Then
                 ds.Transform = Target.Transform.Value

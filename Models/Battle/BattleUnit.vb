@@ -1,8 +1,11 @@
 ﻿Public MustInherit Class BattleUnit
     ''' <summary>
+    ''' 生命的上限
+    ''' </summary>
+    Public ReadOnly Property MaxStrength!
+    ''' <summary>
     ''' 强度。如果小于0则会被摧毁。
     ''' </summary>
-    ''' <returns></returns>
     Public Property Strength!
     ''' <summary>
     ''' 武器和它们的位置

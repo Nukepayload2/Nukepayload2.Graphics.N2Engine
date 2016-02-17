@@ -1,11 +1,50 @@
 ﻿Public Class BitmapAnimation
     Inherits AnimatedVisual
-
     Implements IDisposable
+    ''' <summary>
+    ''' 仅使用图像列表初始化
+    ''' </summary>
+    ''' <param name="Frames">图像列表</param>
+    Sub New(Frames As IList(Of CanvasBitmap))
+        Me.Frames = Frames
+    End Sub
+    ''' <summary>
+    ''' 创建带二维变换和透明度的动画
+    ''' </summary>
+    ''' <param name="Frames">图像列表</param>
+    ''' <param name="Transform">二位变换</param>
+    ''' <param name="Opacity">透明度。0透明，1不透明</param>
+    Sub New(Frames As IList(Of CanvasBitmap), Transform As Matrix3x2, Opacity!)
+        MyClass.New(Frames)
+        Me.Transform = New Matrix3x2?(Transform)
+        Me.Opacity = Opacity
+    End Sub
+    ''' <summary>
+    ''' 创建带二维变换和透明度的动画到带有透视的空间中
+    ''' </summary>
+    ''' <param name="Frames">图像列表</param>
+    ''' <param name="Transform">二位变换</param>
+    ''' <param name="Opacity">透明度。0透明，1不透明</param>
+    ''' <param name="Perspective">三维场景的透视</param>
+    Sub New(Frames As IList(Of CanvasBitmap), Transform As Matrix3x2, Opacity!, Perspective As Matrix4x4)
+        MyClass.New(Frames, Transform, Opacity)
+        Me.Perspective = New Matrix4x4?(Perspective)
+    End Sub
+    ''' <summary>
+    ''' 创建带二维变换和透明度的动画, 并且指定每一帧的特效
+    ''' </summary>
+    ''' <param name="Frames">图像列表</param>
+    ''' <param name="Transform">二位变换</param>
+    ''' <param name="Opacity">透明度。0透明，1不透明</param>
+    ''' <param name="ApplyEffect">设置Effect的方法</param>
+    Sub New(Frames As IList(Of CanvasBitmap), Transform As Matrix3x2, Opacity!, ApplyEffect As Func(Of ICanvasImage, ICanvasResourceCreator, ICanvasEffect))
+        MyClass.New(Frames, Transform, Opacity)
+        Me.ApplyEffect = ApplyEffect
+    End Sub
     ''' <summary>
     ''' 已经解析过的图像。以帧的形式存放。必须根据相应的<see cref="CanvasCreateResourcesEventArgs"/>创建这些位图。
     ''' </summary>
-    Public Property Frames As ICollection(Of CanvasBitmap)
+    Public Property Frames As IList(Of CanvasBitmap)
     ''' <summary>
     ''' 透明度
     ''' </summary>
@@ -19,14 +58,9 @@
     ''' </summary>
     Public Property Perspective As Matrix4x4?
     ''' <summary>
-    ''' 施加的与<see cref="Transform"/>无关的滤镜效果, 比如透明度，瓷砖，扭曲。
+    ''' 处理特效
     ''' </summary>
-    Public Property Effect As ICanvasEffect
-    ''' <summary>
-    ''' 如果指定了Effect，则要设定特效的数据源
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property SetEffectSource As Action(Of ICanvasImage)
+    Public Property ApplyEffect As Func(Of ICanvasImage, ICanvasResourceCreator, ICanvasEffect)
     ''' <summary>
     ''' 重写默认的循环行为
     ''' </summary>

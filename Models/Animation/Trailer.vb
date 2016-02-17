@@ -5,7 +5,7 @@ Public Class Trailer
     ''' <summary>
     ''' 尾焰动画
     ''' </summary>
-    Public Property AttachedAnimation As BitmapAnimation
+    Public Property TrailerAnimation As BitmapAnimation
     ''' <summary>
     ''' 每多少帧产生一个尾焰动画
     ''' </summary>
