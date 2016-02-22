@@ -13,5 +13,5 @@
         Return payload(ID)
     End Function
 
-    MustOverride Async Function LoadAsync() As Task Implements IGameResourceManager(Of TResID, TResource).LoadAsync
+    MustOverride Async Function LoadAsync(Creator As ICanvasResourceCreator) As Task Implements IGameResourceManager(Of TResID, TResource).LoadAsync
 End Class

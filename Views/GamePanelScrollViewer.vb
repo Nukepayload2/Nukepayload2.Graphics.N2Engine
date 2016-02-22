@@ -105,7 +105,7 @@ Public MustInherit Class GamePanelScrollViewer
         args.TrackAsyncAction((Async Function()
                                    If _MinimapImageManager Is Nothing Then _MinimapImageManager = InitializeImageManager(sender)
                                    Debug.WriteLine("加载minimap图片资源")
-                                   Await MinimapImageManager.LoadAsync()
+                                   Await MinimapImageManager.LoadAsync(sender)
                                    For Each obj In Panel.AnimObjects
                                        obj.Presenter.OnCreateCustomMinimapResource(sender, args)
                                    Next

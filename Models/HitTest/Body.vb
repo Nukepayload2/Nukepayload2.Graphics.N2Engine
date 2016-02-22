@@ -25,7 +25,7 @@ Namespace Global.Box2D
             Me._xf.R.Set(bd.angle)
             Me._sweep.localCenter = bd.massData.center
             Me._sweep.t0 = 1.0!
-            Me._sweep.a0 = Me._sweep.a = bd.angle
+            Me._sweep.a0 = Me._sweep.a.SetValue(bd.angle)
             Me._sweep.c0 = Me._sweep.c.SetValue(MathUtils.Multiply(Me._xf, Me._sweep.localCenter))
             Me._jointList = Nothing
             Me._contactList = Nothing
@@ -403,7 +403,7 @@ Namespace Global.Box2D
                 Me._xf.R.Set(angle)
                 Me._xf.Position = position
                 Me._sweep.c0 = Me._sweep.c.SetValue(MathUtils.Multiply(Me._xf, Me._sweep.localCenter))
-                Me._sweep.a0 = Me._sweep.a = angle
+                Me._sweep.a0 = Me._sweep.a.SetValue(angle)
                 Dim broadPhase As BroadPhase = Me._world._contactManager._broadPhase
                 Dim fixture As Fixture = Me._fixtureList
                 Do While (fixture IsNot Nothing)

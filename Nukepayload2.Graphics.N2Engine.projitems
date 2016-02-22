@@ -142,6 +142,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Spark\SparkParticleSystem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Block2D.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\BitmapCacheHelper.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\CanvasGeometryExtension.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameObjectsHelper.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameHitTestFilterBehavior.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ObjectHelpers\GameHitTestResultBehavior.vb" />
@@ -165,6 +166,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\GamePanelScrollViewer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\GamePanelView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\GameVisualView.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\LightClipCalculator.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\FlameParticleSystemView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\GasParticleSystemView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\RailgunParticleSystemView.vb" />

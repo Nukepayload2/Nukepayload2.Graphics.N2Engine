@@ -31,7 +31,7 @@ Public MustInherit Class GamePanelView
         args.TrackAsyncAction((Async Function()
                                    If _AnimatedImageManager Is Nothing Then _AnimatedImageManager = InitializeImageManager(sender)
                                    Debug.WriteLine("加载动态图片资源")
-                                   Await AnimatedImageManager.LoadAsync()
+                                   Await AnimatedImageManager.LoadAsync(sender)
                                    For Each obj In Panel.AnimObjects
                                        obj.Presenter.OnCreateCustomAnimatedResource(sender, args)
                                    Next
@@ -95,7 +95,7 @@ Public MustInherit Class GamePanelView
         args.TrackAsyncAction((Async Function()
                                    If _StaticImageManager Is Nothing Then _StaticImageManager = InitializeImageManager(sender)
                                    Debug.WriteLine("加载静态图片资源")
-                                   Await StaticImageManager.LoadAsync()
+                                   Await StaticImageManager.LoadAsync(sender)
                                    For Each obj In Panel.AnimObjects
                                        obj.Presenter.OnCreateCustomStaticResource(sender, args)
                                    Next
