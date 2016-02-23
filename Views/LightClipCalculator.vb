@@ -15,17 +15,17 @@ Public Class LightClipCalculator
                 Return (Point2 - Point1).Length
             End Get
         End Property
+        Const Allowance! = 0.01
         ''' <summary>
         ''' 两个线段有没有交点
         ''' </summary>
         Public Function HasIntersection(another As LineSegment) As Boolean
-            Dim a = Point1, b = Point2, c = another.Point1, d = another.Point2
-            Dim sabc = (a.X - c.X) * (b.Y - c.Y) - (a.Y - c.Y) * (b.X - c.X)
-            Dim sabd = (a.X - d.X) * (b.Y - d.Y) - (a.Y - d.Y) * (b.X - d.X)
-            If sabc * sabd >= 0 Then Return False
-            Dim scda = (c.X - a.X) * (d.Y - a.Y) - (c.Y - a.Y) * (d.X - a.X)
-            Dim scdb = scda + sabc - sabd
-            Return scda * scdb < 0
+            Dim inters = Intersection(another)
+            If inters.HasValue Then
+                Return (inters.Value - Point1).Length > Allowance AndAlso (inters.Value - Point2).Length > Allowance AndAlso
+                    (inters.Value - another.Point1).Length > Allowance AndAlso (inters.Value - another.Point2).Length > Allowance
+            End If
+            Return False
         End Function
         ''' <summary>
         ''' 求线段的交点
@@ -48,20 +48,20 @@ Public Class LightClipCalculator
         Public Function RayToBoundary(BoundarySize As Size) As LineSegment
             Dim length! = CSng(BoundarySize.Width + BoundarySize.Height)
             Dim direction = Point2 - Point1
-            Point2 = Point1 + length * direction / direction.Length()
+            Point2 = Point1 + length / direction.Length() * direction
             Return Me
         End Function
         Public Function AngleX#()
             Dim direction = Point2 - Point1
             Dim cosval = Math.Acos(direction.X / direction.Length)
-            Return If(direction.Y < 0, -cosval, cosval)
+            Return If(direction.Y < 0, 2 * Math.PI - cosval, cosval)
         End Function
         Public Function Angle#(other As LineSegment)
             Dim v1 = Point2 - Point1
             Dim v2 = other.Point2 - other.Point1
             Dim v1v2 = v1.X * v2.X + v1.Y * v2.Y
             Dim acos = Math.Acos(v1v2 / (v1.Length * v2.Length))
-            Return If(v1.X * v2.Y < v2.X * v1.Y, Math.PI * 2 - acos, acos)
+            Return If(v1.X * v2.Y < v2.X * v1.Y, 2 * Math.PI - acos, acos)
         End Function
 
     End Structure
@@ -73,15 +73,15 @@ Public Class LightClipCalculator
                                    Select ln Distinct Into ToArray
                        Select Rays = Aggregate tes In geo.Tessellate
                            From light In {New LineSegment(SourcePoint, tes.Vertex1), New LineSegment(SourcePoint, tes.Vertex2), New LineSegment(SourcePoint, tes.Vertex3)}
-                               Where Not (Aggregate l In Lines Where light.HasIntersection(l) Into Any)
+                               Where Not (Aggregate l In Lines Where light.RayToBoundary(ScreenSize).HasIntersection(l) Into Any)
                            Select light
                        Into ToArray
                        Where Rays.Length >= 2
-                       Let fir = Rays.First
-                       Select Arr = Aggregate ln In Rays Order By ln.Angle(fir) Into ToArray
+                       Let Fir = Rays.First
+                       Select Arr = Aggregate ln In Rays Order By ln.Angle(Fir) Into ToArray
                        Select CanvasGeometry.CreatePolygon(resource, {Arr.First.Point2, Arr.First.RayToBoundary(ScreenSize).Point2, Arr.Last.RayToBoundary(ScreenSize).Point2, Arr.Last.Point2})
                    Into ToArray
-        Return CanvasGeometry.CreateGroup(resource, geos) 'geos.Union
+        Return geos.Union
     End Function
 
 End Class
