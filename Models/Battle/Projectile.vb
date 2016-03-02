@@ -20,7 +20,7 @@
     ''' </summary>
     Public Property IsHitOrAbandoned As Boolean
     ''' <summary>
-    ''' 如果不是轨迹不是直线, 则要指定贝塞尔曲线的控制点的位置
+    ''' 弹丸的速度。如果不指定则会立即击中。
     ''' </summary>
-    Public Property BezelControlPoint As Vector2?
+    Public Property Speed As Vector2?
 End Class

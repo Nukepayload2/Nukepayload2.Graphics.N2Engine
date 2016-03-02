@@ -1,5 +1,30 @@
 # Nukepayload2.Graphics.N2Engine
 适用于Win2D的图形框架<br />
+依赖：<br />
+<dlv>
+    <li>
+        Universal Windows
+    </li>
+    <li>
+        Microsoft.NetCore.UniversalWindowsPlatform
+    </li>
+    <li>
+        Win2D
+    </li>
+    <li>
+        Newtonsoft.Json
+    </li>
+    <li>
+        SQLite for Universal Windows Platform
+    </li>
+    <li>
+        SQLite.Net-PCL
+    </li>
+    <li>
+        Visual C++ 2015 Runtime for Universal Windows Platform Apps
+    </li>
+</dlv>
+
 整体进度：<br />
 <h3>模型</h3><br />
 <table>
@@ -112,10 +137,34 @@
         </tr>
         <tr>
             <td>
+                碰撞检测
+            </td>
+            <td>
+                已使用Box2D
+            </td>
+        </tr>
+        <tr>
+            <td>
                 动画系统
             </td>
             <td>
                 编写中
+            </td>
+        </tr>
+        <tr>
+            <td>
+                图块表
+            </td>
+            <td>
+                编写中
+            </td>
+        </tr>
+        <tr>
+            <td>
+                带光照的背景
+            </td>
+            <td>
+                测试失败：光照效果在特定角度漏光
             </td>
         </tr>
     </tbody>
@@ -139,14 +188,6 @@
             </td>
             <td>
                 测试通过
-            </td>
-        </tr>
-        <tr>
-            <td>
-                碰撞检测
-            </td>
-            <td>
-                已使用Box2D
             </td>
         </tr>
     </tbody>

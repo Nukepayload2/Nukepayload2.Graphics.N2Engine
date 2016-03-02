@@ -8,7 +8,7 @@
     Public Property Foreground As Color = Colors.DodgerBlue
     Public Overrides Property Particles As New Queue(Of RailgunParticle)
     Public Overrides ReadOnly Property Presenter As GameVisualView = New RailgunParticleSystemView(Me)
-    Public Overrides Property SpawnCount As Integer = 200
+    Public Overrides Property SpawnCount As Integer = 400
     Public Overrides Property SpawnDuration As Integer = 0
     Public Overrides Property SpawnInterval As Integer = 1
     Dim progress% = 1

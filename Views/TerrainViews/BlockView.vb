@@ -1,6 +1,6 @@
 ﻿Public Class BlockView
-    Inherits TypedGameVisualPresenter(Of Block2D)
-    Sub New(target As Block2D)
+    Inherits TypedGameVisualPresenter(Of StaticBlock2D)
+    Sub New(target As StaticBlock2D)
         MyBase.New(target)
     End Sub
     Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)

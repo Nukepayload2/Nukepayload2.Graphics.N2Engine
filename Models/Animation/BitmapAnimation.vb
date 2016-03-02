@@ -86,6 +86,11 @@
     ''' </summary>
     Public ReadOnly Property NextAnimations As ICollection(Of BitmapAnimation)
     ''' <summary>
+    ''' 如果切换到了下一个动画，则用这个属性记录切换到了哪个动画
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property NextAnimationIndex% = -1
+    ''' <summary>
     ''' 更新画面了多少次。
     ''' </summary>
     Public FrameCount% = 0

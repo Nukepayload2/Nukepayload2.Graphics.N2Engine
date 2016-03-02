@@ -3,14 +3,17 @@
 ''' </summary>
 Public MustInherit Class GameVisual
     ''' <summary>
+    ''' 同类的动画Z序越高越靠外，反之靠里。注意：<see cref="StaticVisual"/>总是比<see cref="AnimatedVisual"/>靠里。有时需要多创建一些<see cref="GamePanelView"/>来打破这个规则。
+    ''' </summary>
+    Public Property ZIndex As Integer
+    ''' <summary>
     ''' 物体的位置。这通常是物体的左上角。
     ''' </summary>
-    ''' <returns></returns>
     Public Property Location As Vector2
     ''' <summary>
-    ''' 指定物体的大致形状以进行碰撞检测。如果不需要碰撞检测就不用指定形状。
+    ''' 派生类继承时在构造函数指定物体的物理属性以便于进行模拟。如果这个物体是一般的贴图则此属性留空。
     ''' </summary>
-    Public Property Shape As Geometry
+    Public Property Collision As Box2D.Body
     ''' <summary>
     ''' 用于放置绘制代码
     ''' </summary>
