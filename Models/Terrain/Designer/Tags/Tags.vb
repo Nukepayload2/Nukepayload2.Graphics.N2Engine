@@ -1,4 +1,4 @@
 ﻿Public MustInherit Class Tags
-    Inherits TerrainItem
+    Inherits ToolboxItem
     Public Overrides Property Category As String = TerrainCategories.Tags
 End Class

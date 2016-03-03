@@ -1,0 +1,39 @@
+﻿<ContentDialog
+    x:Class="MysteryStates.TileResourceHelperDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MysteryStates"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    PrimaryButtonText="关闭"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+    <Grid MinWidth="400" MinHeight="200">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock VerticalAlignment="Center">图块资源代码生成器</TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Column="1">
+            <Button x:Name="BtnOpenImage" Padding="2" ToolTipService.ToolTip="打开图片">
+                <SymbolIcon Symbol="Pictures"/>
+            </Button>
+            <Button x:Name="BtnCopyCode" Padding="2" ToolTipService.ToolTip="复制VB代码">
+                <Grid>
+                    <SymbolIcon Symbol="Copy"/>
+                    <TextBlock FontWeight="Bold" FontSize="7" Margin="0,0,2,0" Foreground="Blue" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="VB"/>
+                </Grid>
+            </Button>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" >
+            <Image x:Name="ImgSourceView"/>
+        </ScrollViewer>
+        <ListBox Width="56" Grid.Row="1" Grid.Column="1">
+            
+        </ListBox>
+    </Grid>
+</ContentDialog>

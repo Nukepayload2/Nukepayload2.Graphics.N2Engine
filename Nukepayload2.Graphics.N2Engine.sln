@@ -1,0 +1,15 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Nukepayload2.Graphics.N2Engine", "Nukepayload2.Graphics.N2Engine.shproj", "{4072882C-C2C9-4709-B7A9-423E4838EE03}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Nukepayload2.Graphics.N2Engine.projitems*{4072882c-c2c9-4709-b7a9-423e4838ee03}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -15,6 +15,10 @@ Public MustInherit Class GameVisual
     ''' </summary>
     Public Property Collision As Box2D.Body
     ''' <summary>
+    ''' 物体的大小。用于编辑器和裁剪。
+    ''' </summary>
+    Public Property Clip As Size?
+    ''' <summary>
     ''' 用于放置绘制代码
     ''' </summary>
     Public MustOverride ReadOnly Property Presenter As GameVisualView

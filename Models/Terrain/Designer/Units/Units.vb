@@ -1,4 +1,4 @@
 ﻿Public MustInherit Class Units
-    Inherits TerrainItem
+    Inherits ToolboxItem
     Public Overrides Property Category As String = TerrainCategories.Units
 End Class

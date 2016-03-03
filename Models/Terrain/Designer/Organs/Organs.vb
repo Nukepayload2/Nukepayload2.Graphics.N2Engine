@@ -1,4 +1,4 @@
 ﻿Public MustInherit Class Organs
-    Inherits TerrainItem
+    Inherits ToolboxItem
     Public Overrides Property Category As String = TerrainCategories.Organs
 End Class

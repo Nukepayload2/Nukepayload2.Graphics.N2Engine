@@ -1,4 +1,4 @@
 ﻿Public MustInherit Class ParticleSystems
-    Inherits TerrainItem
+    Inherits ToolboxItem
     Public Overrides Property Category As String = TerrainCategories.ParticleSystems
 End Class

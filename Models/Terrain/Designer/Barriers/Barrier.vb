@@ -1,4 +1,4 @@
 ﻿Public MustInherit Class Barrier
-    Inherits TerrainItem
+    Inherits ToolboxItem
     Public Overrides Property Category As String = TerrainCategories.Barriers
 End Class

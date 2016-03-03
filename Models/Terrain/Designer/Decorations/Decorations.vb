@@ -1,4 +1,4 @@
 ﻿Public MustInherit Class Decorations
-    Inherits TerrainItem
+    Inherits ToolboxItem
     Public Overrides Property Category As String = TerrainCategories.Decorations
 End Class

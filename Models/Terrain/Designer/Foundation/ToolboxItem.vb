@@ -1,6 +1,8 @@
 ﻿Imports System.Reflection
-
-Public MustInherit Class TerrainItem
+''' <summary>
+''' 表示设计器的工具箱里面的东西
+''' </summary>
+Public MustInherit Class ToolboxItem
     ''' <summary>
     ''' 分类名。通常自带的对象在<see cref="TerrainCategories"/>中选取分类名。
     ''' </summary>
@@ -26,11 +28,11 @@ Public MustInherit Class TerrainItem
     ''' </summary>
     Public Property FilledProperties As Tuple(Of String, String)()
     ''' <summary>
-    ''' 从当前程序集检索目标具体的<see cref="TerrainItem"/>类型。如果找不到则返回空。
+    ''' 从当前程序集检索目标具体的<see cref="ToolboxItem"/>类型。如果找不到则返回空。
     ''' </summary>
     Public Function TrySearchTargetType() As Type
         If String.IsNullOrEmpty(TargetTypeName) Then Return Nothing
-        Dim asm = GetType(TerrainItem).GetTypeInfo.Assembly
+        Dim asm = Me.GetType.GetTypeInfo.Assembly
         Return asm.GetType(TargetTypeName, False, False)
     End Function
 End Class

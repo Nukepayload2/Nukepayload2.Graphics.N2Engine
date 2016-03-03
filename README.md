@@ -1,30 +1,34 @@
 # Nukepayload2.Graphics.N2Engine
-适用于Win2D的图形框架<br />
-依赖：<br />
+<h3>适用于Win2D的图形框架</h3><br />
+<h4>version 1.0.276 alpha</h4><br />
+<h5>目前的版本是早期版本，仍然会有巨大改动</h5><br />
+依赖：
 <dlv>
     <li>
         Universal Windows
     </li>
     <li>
-        Microsoft.NetCore.UniversalWindowsPlatform
+        Microsoft.NetCore.UniversalWindowsPlatform >= 5.0
     </li>
     <li>
-        Win2D
+        Win2D >= 0.16
     </li>
     <li>
-        Newtonsoft.Json
+        Newtonsoft.Json >= 8.0
     </li>
     <li>
         SQLite for Universal Windows Platform
     </li>
     <li>
-        SQLite.Net-PCL
+        SQLite.Net-PCL >= 3.1.0
     </li>
     <li>
         Visual C++ 2015 Runtime for Universal Windows Platform Apps
     </li>
+    <li>
+        MathNet.Numerics >= 3.11.0
+    </li>
 </dlv>
-
 整体进度：<br />
 <h3>模型</h3><br />
 <table>

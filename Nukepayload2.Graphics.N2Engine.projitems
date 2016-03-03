@@ -106,6 +106,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\WorldFlags.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\WorldManifold.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\XForm.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\DesignerStatus.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Foundation\DeviceInformation.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFile.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFileItem.vb" />
@@ -115,17 +116,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\SpriteSheet.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\StaticBlock2D.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\TiledBackground.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Barriers\Barrier.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Decorations\Decorations.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Foundation\InputPointer.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Foundation\TerrainCategories.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Foundation\TerrainItem.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Inventories\Inventories.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Lights\Lights.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Organs\Organs.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\ParticleSystems\ParticleSystems.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Tags\Tags.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Editor\Units\Units.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Barriers\Barrier.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\Decorations.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Foundation\InputPointer.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Foundation\TerrainCategories.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Foundation\ToolboxItem.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Inventories\Inventories.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Lights\Lights.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Organs\Organs.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\ParticleSystems\ParticleSystems.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Tags\Tags.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Units\Units.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Units\UnitDirectionHelper.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Units\UnitDirections.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Units\Infantry.vb" />
@@ -196,6 +197,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\SparkParticleSystemView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TerrainViews\BlockView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TerrainViews\TiledBackgroundView.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\TileResourceHelperDialog.xaml.vb">
+      <DependentUpon>TileResourceHelperDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\WorldBuilderPage.xaml.vb">
+      <DependentUpon>WorldBuilderPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)README.md" />
@@ -204,5 +211,15 @@
     <Folder Include="$(MSBuildThisFileDirectory)Models\Particles\Beam\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Particles\Bolt\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Particles\Storm\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\TileResourceHelperDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\WorldBuilderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
