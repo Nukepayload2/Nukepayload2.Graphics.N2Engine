@@ -11,7 +11,7 @@
         Microsoft.NetCore.UniversalWindowsPlatform >= 5.0
     </li>
     <li>
-        Win2D >= 0.16
+        Win2D >= 1.16
     </li>
     <li>
         Newtonsoft.Json >= 8.0
@@ -27,6 +27,15 @@
     </li>
     <li>
         MathNet.Numerics >= 3.11.0
+    </li>
+    <li>
+        SQLite.Net.Async-PCL >= 3.1.1
+    </li>
+    <li>
+        SQLiteNetExtensions >= 1.3.0
+    </li>
+    <li>
+        SQLiteNetExtensions.Async >= 1.3.0
     </li>
 </dlv>
 整体进度：<br />

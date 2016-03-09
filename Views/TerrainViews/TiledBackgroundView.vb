@@ -1,12 +1,12 @@
 ﻿Imports Microsoft.Graphics.Canvas.Geometry
-
-Public Class TiledBackgroundView
-    Inherits TypedGameVisualPresenter(Of TiledBackground)
-    Sub New(target As TiledBackground)
-        MyBase.New(target)
-    End Sub
-    Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
-        Using tile = New TileEffect() With {
+Namespace Global.Nukepayload2.Graphics.N2Engine
+    Public Class TiledBackgroundView
+        Inherits TypedGameVisualPresenter(Of TiledBackground)
+        Sub New(target As TiledBackground)
+            MyBase.New(target)
+        End Sub
+        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+            Using tile = New TileEffect() With {
                 .Source = sender.AnimatedImageManager.GetResource(Target.ResourceID),
                 .SourceRectangle = New Rect(0, 0, 58, 58)
             },
@@ -27,34 +27,36 @@ Public Class TiledBackgroundView
                 .Source1 = composite, .Source1Amount = Target.SpotLight.LightStrength, .MultiplyAmount = Target.SpotLight.SpriteBrightness,
                 .Source2 = tile, .Source2Amount = Target.SpotLight.SpriteBrightness
             }
-            If Target.SpotLight.LightCollision IsNot Nothing Then
-                Using layer = DrawingSession.CreateLayer(Target.SpotLight.SpriteBrightness)
-                    DrawingSession.DrawImage(tile)
-                End Using
-                Dim lightpos2d = New Vector2(Target.SpotLight.LightPosition.X, Target.SpotLight.LightPosition.Y)
-                Dim clipgeo = New LightClipCalculator().CalculateClipGeometry(DrawingSession, lightpos2d, Target.SpotLight.LightCollision, sender.Panel.SpaceSize)
-                Dim clipsrc = CanvasGeometry.CreateGroup(DrawingSession, {
+                If Target.SpotLight.LightCollision IsNot Nothing Then
+                    Using layer = DrawingSession.CreateLayer(Target.SpotLight.SpriteBrightness)
+                        DrawingSession.DrawImage(tile)
+                    End Using
+                    Dim lightpos2d = New Vector2(Target.SpotLight.LightPosition.X, Target.SpotLight.LightPosition.Y)
+                    Dim clipgeo = New LightClipCalculator().CalculateClipGeometry(DrawingSession, lightpos2d, Target.SpotLight.LightCollision, sender.Panel.SpaceSize)
+                    Dim clipsrc = CanvasGeometry.CreateGroup(DrawingSession, {
                                                             clipgeo,
                                                             CanvasGeometry.CreateRectangle(DrawingSession, New Rect(New Point, sender.Panel.SpaceSize))
                                                          })
-                Using layer = DrawingSession.CreateLayer(1, clipsrc)
+                    Using layer = DrawingSession.CreateLayer(1, clipsrc)
+                        DrawingSession.DrawImage(composite2)
+                    End Using
+                Else
                     DrawingSession.DrawImage(composite2)
-                End Using
-            Else
-                DrawingSession.DrawImage(composite2)
-            End If
-        End Using
-    End Sub
-    '光照效果不要画到小地图上面
-    Public Overrides Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
-        Using tile = New TileEffect() With {
+                End If
+            End Using
+        End Sub
+        '光照效果不要画到小地图上面
+        Public Overrides Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+            Using tile = New TileEffect() With {
                 .Source = sender.AnimatedImageManager.GetResource(Target.ResourceID),
                 .SourceRectangle = New Rect(0, 0, 58, 58)
             }
-            DrawingSession.DrawImage(tile)
-        End Using
-    End Sub
-    Public Overrides Sub OnGlobalQualityChanged(Quality As GraphicQualityManager)
+                DrawingSession.DrawImage(tile)
+            End Using
+        End Sub
+        Public Overrides Sub OnGlobalQualityChanged(Quality As GraphicQualityManager)
 
-    End Sub
-End Class
+        End Sub
+    End Class
+
+End Namespace

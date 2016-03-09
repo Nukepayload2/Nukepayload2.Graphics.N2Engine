@@ -1,19 +1,19 @@
 ﻿Option Strict Off
 Imports Microsoft.Graphics.Canvas.Geometry
-
-Public Class FlameParticleSystemView
-    Inherits TypedGameVisualPresenter(Of FlameParticleSystem)
-    Public Sub New(flamePartialSystem As FlameParticleSystem)
-        MyBase.New(flamePartialSystem)
-    End Sub
-    Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
-        For Each part In Target.Particles
-            Using textCommandList As New CanvasCommandList(DrawingSession),
+Namespace Global.Nukepayload2.Graphics.N2Engine
+    Public Class FlameParticleSystemView
+        Inherits TypedGameVisualPresenter(Of FlameParticleSystem)
+        Public Sub New(flamePartialSystem As FlameParticleSystem)
+            MyBase.New(flamePartialSystem)
+        End Sub
+        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+            For Each part In Target.Particles
+                Using textCommandList As New CanvasCommandList(DrawingSession),
                 ds = textCommandList.CreateDrawingSession()
-                ds.Clear(Color.FromArgb(0, 0, 0, 0))
-                Dim CurFlameSize = Target.FlameSize * ((part.Age / part.LifeTime) ^ 2)
-                Dim centerPoint As New Vector2(0, CurFlameSize * 1.4)
-                Using FlameEffect As New Transform2DEffect With
+                    ds.Clear(Color.FromArgb(0, 0, 0, 0))
+                    Dim CurFlameSize = Target.FlameSize * ((part.Age / part.LifeTime) ^ 2)
+                    Dim centerPoint As New Vector2(0, CurFlameSize * 1.4)
+                    Using FlameEffect As New Transform2DEffect With
                 {
                     .Source = New DisplacementMapEffect With
                     {
@@ -53,18 +53,20 @@ Public Class FlameParticleSystemView
                         .Amount = 40.0F
                     },
                     .TransformMatrix = Matrix3x2.CreateScale(1, 2, centerPoint)}
-                    'Dim pathb As New CanvasPathBuilder(ds)
-                    'pathb.BeginFigure(New Vector2(CurFlameSize / 2, 0))
-                    'pathb.AddCubicBezier(New Vector2(0, CurFlameSize * 2), New Vector2(CurFlameSize, CurFlameSize * 2), New Vector2(CurFlameSize / 2, 0))
-                    'pathb.EndFigure(CanvasFigureLoop.Closed)
-                    'ds.FillGeometry(CanvasGeometry.CreatePath(pathb), New Vector2(CurFlameSize / 2, 0), Colors.White)
-                    ds.FillCircle(New Vector2, CurFlameSize, Colors.White)
-                    DrawingSession.DrawImage(FlameEffect, part.Location)
+                        'Dim pathb As New CanvasPathBuilder(ds)
+                        'pathb.BeginFigure(New Vector2(CurFlameSize / 2, 0))
+                        'pathb.AddCubicBezier(New Vector2(0, CurFlameSize * 2), New Vector2(CurFlameSize, CurFlameSize * 2), New Vector2(CurFlameSize / 2, 0))
+                        'pathb.EndFigure(CanvasFigureLoop.Closed)
+                        'ds.FillGeometry(CanvasGeometry.CreatePath(pathb), New Vector2(CurFlameSize / 2, 0), Colors.White)
+                        ds.FillCircle(New Vector2, CurFlameSize, Colors.White)
+                        DrawingSession.DrawImage(FlameEffect, part.Location)
+                    End Using
                 End Using
-            End Using
-        Next
-    End Sub
-    Public Overrides Sub OnGlobalQualityChanged(Quality As GraphicQualityManager)
+            Next
+        End Sub
+        Public Overrides Sub OnGlobalQualityChanged(Quality As GraphicQualityManager)
 
-    End Sub
-End Class
+        End Sub
+    End Class
+
+End Namespace

@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="Nukepayload2.Graphics.N2Engine.ObjectViewerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nukepayload2.Graphics.N2Engine"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <local:ObjectViewerViewModel x:Key="objs"/>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <SemanticZoom x:Name="LstTypes">
+            <SemanticZoom.ZoomedInView>
+                <ListView Name="inView" ItemsSource="{Binding Source={StaticResource objs},Path=Types.View}">
+                    <ListView.GroupStyle>
+                        <GroupStyle>
+                            <!--用于显示列表头的数据项的模板-->
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <Border Background="Blue">
+                                        <TextBlock Foreground="White" Text="{Binding Namespace}" FontSize="26"></TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ListView.GroupStyle>
+                    <!--用于显示列表的数据项的模板-->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" FontSize="18"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </SemanticZoom.ZoomedInView>
+            <SemanticZoom.ZoomedOutView>
+                <!-- 在这里放置GridView(或ListView)以表示缩小视图 -->
+                <ListView Name="outView" ItemsSource="{Binding Source={StaticResource objs},Path=Types.View.CollectionGroups}">
+                    <!--用于显示弹出的分组列表视图的数据项的模板-->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Blue">
+                                <TextBlock Foreground="White" Text="{Binding Group.Namespace}" FontSize="26"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </SemanticZoom.ZoomedOutView>
+        </SemanticZoom>
+        <TextBox IsReadOnly="True" x:Name="TxtObjCode" Grid.Column="1" AcceptsReturn="True">
+            <TextBox.Header>
+                <Grid>
+                    <TextBlock FontSize="24">成员</TextBlock>
+                </Grid>
+            </TextBox.Header>
+        </TextBox>
+        <Button HorizontalAlignment="Right" Grid.Column="2" VerticalAlignment="Top"  Click="BtnClose_Click">
+            <SymbolIcon Symbol="Clear"/>
+        </Button>
+    </Grid>
+</Page>

@@ -1,11 +1,11 @@
 ﻿<Page
-    x:Class="MysteryStates.WorldBuilderPage"
+    x:Class="Nukepayload2.Graphics.N2Engine.WorldBuilderPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MysteryStates" FontSize="12"
+    xmlns:local="using:Nukepayload2.Graphics.N2Engine" FontSize="12"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" >
     <Page.Resources>
         <DataTemplate x:Key="PivotSmallHeaderTemplate">
             <ContentPresenter Content="{Binding }" FontSize="16"/>
@@ -17,7 +17,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.Resources>
-            <local:WorldBuilderViewModel x:Key="menudata"/>
+            <local:WorldBuilderSidebarViewModel x:Key="menudata"/>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -41,6 +41,7 @@
                             <MenuFlyoutSeparator/>
                             <MenuFlyoutItem>保存面板代码 (*.vb)</MenuFlyoutItem>
                             <MenuFlyoutItem>另存为面板代码 (*.vb)</MenuFlyoutItem>
+                            <MenuFlyoutItem Click="BtnClose_Click">关闭工程并退出</MenuFlyoutItem>
                         </MenuFlyout>
                     </Button.Flyout>
                     文件
@@ -51,7 +52,7 @@
                             <MenuFlyoutItem>复制</MenuFlyoutItem>
                             <MenuFlyoutItem>粘贴</MenuFlyoutItem>
                             <MenuFlyoutItem>剪切</MenuFlyoutItem>
-                            <MenuFlyoutItem>撤销</MenuFlyoutItem>
+                            <MenuFlyoutItem Click="BtnUndo_Click">撤销 Ctrl+Z</MenuFlyoutItem>
                             <MenuFlyoutItem>重做</MenuFlyoutItem>
                             <MenuFlyoutSeparator/>
                             <MenuFlyoutItem>全选</MenuFlyoutItem>
@@ -64,16 +65,16 @@
                     <Button.Flyout>
                         <MenuFlyout>
                             <ToggleMenuFlyoutItem>使用布局舍入</ToggleMenuFlyoutItem>
-                            <MenuFlyoutSubItem Text="横纵对齐">
+                            <MenuFlyoutSubItem x:Name="AlignmentSubMenu" Text="横纵对齐">
                                 <MenuFlyoutSubItem.Items>
-                                    <ToggleMenuFlyoutItem Text="无"/>
-                                    <ToggleMenuFlyoutItem Text="32"/>
-                                    <ToggleMenuFlyoutItem Text="48"/>
-                                    <ToggleMenuFlyoutItem Text="64"/>
-                                    <ToggleMenuFlyoutItem Text="72"/>
-                                    <ToggleMenuFlyoutItem Text="96"/>
-                                    <ToggleMenuFlyoutItem Text="128"/>
-                                    <ToggleMenuFlyoutItem Text="自定义..."/>
+                                    <ToggleMenuFlyoutItem Text="无" Click="AlignmentSelectionMenuItems_Click"/>
+                                    <ToggleMenuFlyoutItem Text="32" Click="AlignmentSelectionMenuItems_Click" IsChecked="True"/>
+                                    <ToggleMenuFlyoutItem Text="48" Click="AlignmentSelectionMenuItems_Click"/>
+                                    <ToggleMenuFlyoutItem Text="64" Click="AlignmentSelectionMenuItems_Click"/>
+                                    <ToggleMenuFlyoutItem Text="72" Click="AlignmentSelectionMenuItems_Click"/>
+                                    <ToggleMenuFlyoutItem Text="96" Click="AlignmentSelectionMenuItems_Click"/>
+                                    <ToggleMenuFlyoutItem Text="128" Click="AlignmentSelectionMenuItems_Click"/>
+                                    <ToggleMenuFlyoutItem Text="自定义..." Click="AlignmentSelectionMenuItems_Click"/>
                                 </MenuFlyoutSubItem.Items>
                             </MenuFlyoutSubItem>
                         </MenuFlyout>
@@ -119,7 +120,7 @@
                 <Button>
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem>对象浏览器</MenuFlyoutItem>
+                            <MenuFlyoutItem Click="BtnObjViewer_Click">对象浏览器</MenuFlyoutItem>
                             <MenuFlyoutItem>正则表达式测试</MenuFlyoutItem>
                         </MenuFlyout>
                     </Button.Flyout>
@@ -226,12 +227,12 @@
                                     </Viewbox>
                                     <Pivot Padding="-8,-4,-8,0" Margin="0,0,-16,0" HeaderTemplate="{StaticResource PivotSmallHeaderTemplate}" Grid.Row="2" FontSize="15">
                                         <PivotItem Header="构造函数">
-                                            <ListView>
+                                            <ListView x:Name="LstCtors">
 
                                             </ListView>
                                         </PivotItem>
                                         <PivotItem Header="属性和字段">
-                                            <ListView>
+                                            <ListView x:Name="LstProps">
 
                                             </ListView>
                                         </PivotItem>
