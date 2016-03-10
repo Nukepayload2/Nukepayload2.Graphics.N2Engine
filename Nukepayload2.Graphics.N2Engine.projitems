@@ -116,6 +116,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFile.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFileItem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFileItemID.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Barriers\LinearGradientBlock.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Barriers\SolidColorBlock.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\BlockCollisionModes.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\FixedSpriteSheet.vb" />

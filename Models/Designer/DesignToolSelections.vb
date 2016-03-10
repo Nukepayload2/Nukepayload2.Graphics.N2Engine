@@ -39,7 +39,14 @@
         ''' 用于生成径向渐变的颜色
         ''' </summary>
         RadiusGradientEditor
-
+        ''' <summary>
+        ''' 对枚举类型进行编辑
+        ''' </summary>
+        EnumEditor
+        ''' <summary>
+        ''' 即使内部的成员不带有<see cref="N2DesignerVisibleAttribute"/>, 也对其中的属性进行编辑
+        ''' </summary>
+        ObjectEditor
     End Enum
 End Namespace
 

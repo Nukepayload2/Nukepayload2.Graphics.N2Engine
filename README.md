@@ -1,6 +1,6 @@
 # Nukepayload2.Graphics.N2Engine
 <h3>适用于Win2D的图形框架</h3><br />
-<h4>version 1.0.276 alpha</h4><br />
+<h4>version 1.0.570 alpha</h4><br />
 <h5>目前的版本是早期版本，仍然会有巨大改动</h5><br />
 依赖：
 <dlv>
@@ -272,6 +272,113 @@
             </td>
             <td>
                 完善中
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h4>
+    版本编码规则
+</h4>
+<h5>
+    Major 目前主版本号都是 1
+</h5>
+<h5>
+    Minor 目前副版本号都是 0
+</h5>
+<h5>
+    Path 按以下规则编码。如果较高位增加，则会清空较低位的数据。
+</h5>
+<table>
+    <thead>
+        <tr>
+            <th>
+                功能
+            </th>
+            <th>
+                掩码
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                实现Method级别功能, 比如写了某种判定方法。
+            </td>
+            <td>
+                127
+            </td>
+        </tr>
+        <tr>
+            <td>
+                实现Class级别功能, 表示一个Class的功能已经确定并基本实现
+            </td>
+            <td>
+                384
+            </td>
+        </tr>
+        <tr>
+            <td>
+                实现Namespace级别功能, 表示一个Namespace下面的内容以后不会轻易改变
+            </td>
+            <td>
+                1536
+            </td>
+        </tr>
+        <tr>
+            <td>
+                实现Assembly级别功能, 这通常指示一个程序集写完了。
+            </td>
+            <td>
+                6144
+            </td>
+        </tr>
+        <tr>
+            <td>
+                实现跨Runtime级别功能
+            </td>
+            <td>
+                24576
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h5>
+    Revision 按以下规则编码。如果较高位增加，则会清空较低位的数据。Revision 可能不会每次更新都会公开。
+</h5>
+<table>
+    <thead>
+        <tr>
+            <th>
+                功能
+            </th>
+            <th>
+                掩码
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                最初设计
+            </td>
+            <td>
+                0
+            </td>
+        </tr>
+        <tr>
+            <td>
+                较大的重构计数
+            </td>
+            <td>
+                255
+            </td>
+        </tr>
+        <tr>
+            <td>
+                拼合稳定化代码计数
+            </td>
+            <td>
+                16128
             </td>
         </tr>
     </tbody>
