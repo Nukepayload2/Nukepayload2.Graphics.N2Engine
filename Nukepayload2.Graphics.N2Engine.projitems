@@ -196,6 +196,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\GameResourceManager.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\GraphicQualityManager.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\IGameResourceManager.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\DesignerToolboxViewModel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\ObjectViewerViewModel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\WorldBuilderSidebarViewModel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AnimationViews\BitmapAnimationView.vb" />
@@ -224,6 +225,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Documents\引擎功能说明.docx" />
     <None Include="$(MSBuildThisFileDirectory)README.md" />
   </ItemGroup>
   <ItemGroup>
@@ -244,5 +246,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Documents\Ms-PL.txt" />
   </ItemGroup>
 </Project>

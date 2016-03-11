@@ -2,7 +2,7 @@
 
 Namespace Global.Nukepayload2.Graphics.N2Engine
     ''' <summary>
-    ''' 表示设计器的工具箱里面的东西
+    ''' 表示设计器的工具箱里面的东西。它必须有无参数的构造函数。
     ''' </summary>
     Public MustInherit Class ToolboxItem
         ''' <summary>

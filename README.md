@@ -1,7 +1,9 @@
 # Nukepayload2.Graphics.N2Engine
 <h3>适用于Win2D的图形框架</h3><br />
-<h4>version 1.0.570 alpha</h4><br />
+<h4>version 1.0.571 alpha</h4><br />
 <h5>目前的版本是早期版本，仍然会有巨大改动</h5><br />
+<h6>这份源代码使用Ms-PL协议进行公开</h6><br />
+<a href="https://msdn.microsoft.com/zh-cn/vstudio/bb894665.aspx">https://msdn.microsoft.com/zh-cn/vstudio/bb894665.aspx</a>
 依赖：
 <dlv>
     <li>
@@ -89,7 +91,7 @@
                 火焰粒子系统
             </td>
             <td>
-                测试中
+                测试通过
             </td>
         </tr>
         <tr>
@@ -97,7 +99,7 @@
                 火花粒子系统
             </td>
             <td>
-                通过测试
+                测试通过
             </td>
         </tr>
         <tr>
@@ -105,7 +107,7 @@
                 气雾粒子系统
             </td>
             <td>
-                测试中
+                等待测试
             </td>
         </tr>
         <tr>
@@ -113,7 +115,7 @@
                 轨道炮粒子系统
             </td>
             <td>
-                通过测试
+                测试通过
             </td>
         </tr>
         <tr>
@@ -121,7 +123,7 @@
                 烟雾粒子系统
             </td>
             <td>
-                测试中
+                等待测试
             </td>
         </tr>
         <tr>
@@ -129,15 +131,15 @@
                 碎片粒子系统
             </td>
             <td>
-                构思中
+                等待测试
             </td>
         </tr>
         <tr>
             <td>
-                电火花粒子系统
+                电弧粒子系统
             </td>
             <td>
-                构思中
+                等待测试
             </td>
         </tr>
         <tr>
@@ -231,7 +233,7 @@
                 滚动画布
             </td>
             <td>
-                完善中
+                测试失败：鼠标滚轮的行为异常, 画面缩放到最小的行为异常，触摸屏拖动事件处理失败。
             </td>
         </tr>
         <tr>
