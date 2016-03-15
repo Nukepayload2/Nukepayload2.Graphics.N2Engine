@@ -14,6 +14,19 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         Dim IsDrawing As Boolean
         Dim CurRect As New Rectangle With {.Stroke = New SolidColorBrush(Colors.Red), .StrokeThickness = 2}
         Dim DesignStatus As New DesignerStatus
+
+        Dim GameView As WorldBuilderView
+        Dim GamePanel As WorldBuilderPanelViewModel
+        Private Sub WorldBuilderPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+            InkInputAera.Children.Add(CurRect)
+            Canvas.SetZIndex(CurRect, 16)
+            [AddHandler](Page.KeyDownEvent, New KeyEventHandler(AddressOf Page_KeyDown), True)
+            GamePanel = New WorldBuilderPanelViewModel(DesignStatus.CanvasSize)
+            Minimap.Width = DesignStatus.CanvasSize.Width
+            Minimap.Height = DesignStatus.CanvasSize.Height
+            GameView = New WorldBuilderView(GamePanel, Minimap)
+            GameObjectViewerContainer.Content = GameView
+        End Sub
         Private Sub InkInputAera_PointerMoved(sender As Object, e As PointerRoutedEventArgs) Handles InkInputAera.PointerMoved
             If IsDrawing Then
                 Dim CurPressPoint = e.GetCurrentPoint(InkInputAera).Position
@@ -54,11 +67,6 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
             Canvas.SetLeft(placeholder, Canvas.GetLeft(CurRect))
             Canvas.SetTop(placeholder, Canvas.GetTop(CurRect))
             InkInputAera.Children.Add(placeholder)
-        End Sub
-        Private Sub WorldBuilderPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-            InkInputAera.Children.Add(CurRect)
-            Canvas.SetZIndex(CurRect, 16)
-            [AddHandler](Page.KeyDownEvent, New KeyEventHandler(AddressOf Page_KeyDown), True)
         End Sub
 
         Private Sub BtnToggleBurgerL1_Click(sender As Object, e As RoutedEventArgs)

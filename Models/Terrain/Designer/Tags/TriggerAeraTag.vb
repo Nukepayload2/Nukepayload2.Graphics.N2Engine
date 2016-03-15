@@ -2,12 +2,13 @@
     ''' <summary>
     ''' 触发区域用于引发事件
     ''' </summary>
+    <ToolboxItemVisible>
     Public Class TriggerAeraTag
         Inherits Tags
 
         Public Overrides Property Description As String = "触发区域用于引发事件"
         Public Overrides Property Name As String = "触发区域"
-        Public Overrides Property TargetTypeName As String = Nothing
+        Public Overrides Property TargetType As Type
         ''' <summary>
         ''' 触发区域的位置和大小
         ''' </summary>

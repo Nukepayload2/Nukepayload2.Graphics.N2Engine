@@ -8,6 +8,6 @@
         Public Overrides Property Category As String = TerrainCategories.Preserved
         Public Overrides Property Description As String = "代表输入设备的指针, 如鼠标光标。"
         Public Overrides Property Name As String = "指针"
-        Public Overrides Property TargetTypeName As String
+        Public Overrides Property TargetType As Type = Nothing
     End Class
 End Namespace

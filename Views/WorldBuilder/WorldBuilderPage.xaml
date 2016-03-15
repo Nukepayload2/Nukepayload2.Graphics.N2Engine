@@ -17,7 +17,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.Resources>
-            <local:WorldBuilderSidebarViewModel x:Key="menudata"/>
+            <local:DesignerToolboxViewModel x:Key="menudata"/>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -165,10 +165,10 @@
         </Button>
         <SplitView DisplayMode="Inline" x:Name="BurgerL1" OpenPaneLength="80" Grid.Row="1" Grid.ColumnSpan="3">
             <SplitView.Pane>
-                <ListBox x:Name="LstLeftBarLv1" ItemsSource="{Binding Source={StaticResource menudata},Path=Items}">
+                <ListBox x:Name="LstLeftBarLv1" ItemsSource="{Binding Source={StaticResource menudata},Path=ToolboxGroups}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock FontSize="12" Text="{Binding Path=GroupName}"/>
+                            <TextBlock FontSize="12" Text="{Binding Path=Category}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -176,10 +176,10 @@
             <SplitView.Content>
                 <SplitView x:Name="BurgerL2" DisplayMode="Inline" OpenPaneLength="150">
                     <SplitView.Pane>
-                        <ListBox DataContext="{Binding ElementName=LstLeftBarLv1,Path=SelectedItem}" ItemsSource="{Binding Items}">
+                        <ListBox DataContext="{Binding ElementName=LstLeftBarLv1,Path=SelectedItem}" ItemsSource="{Binding Group}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="12" Text="{Binding Name}"/>
+                                    <TextBlock FontSize="12" Text="{Binding Name}" ToolTipService.ToolTip="{Binding Description}"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -189,9 +189,10 @@
                             <SplitView.Content>
                                 <Pivot Padding="-8,-4,-8,0" Margin="0,0,-16,0" HeaderTemplate="{StaticResource PivotSmallHeaderTemplate}">
                                     <PivotItem Header="设计">
-                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto">
-                                            <Canvas Width="1920" Height="1080" Background="Gray" x:Name="InkInputAera" ManipulationMode="All" />
-                                        </ScrollViewer>
+                                        <Grid>
+                                            <ContentControl x:Name="GameObjectViewerContainer"/>
+                                            <Canvas x:Name="InkInputAera" ManipulationMode="All" />
+                                        </Grid>
                                     </PivotItem>
                                     <PivotItem Header="map.json">
                                         <TextBox x:Name="TxtJson"/>
@@ -222,9 +223,11 @@
                                         <TextBlock Margin="2" Grid.Row="1">类型</TextBlock>
                                         <TextBlock Margin="2" Grid.Column="1" Grid.Row="1">GameVisual</TextBlock>
                                     </Grid>
-                                    <Viewbox x:Name="MinimapBox" Height="240" Grid.Row="1">
-                                        
-                                    </Viewbox>
+                                    <Border Background="Black">
+                                        <Viewbox x:Name="MinimapBox" Height="200" Grid.Row="1">
+                                            <local:CanvasAnimatedContainer x:Name="Minimap" />
+                                        </Viewbox>
+                                    </Border>
                                     <Pivot Padding="-8,-4,-8,0" Margin="0,0,-16,0" HeaderTemplate="{StaticResource PivotSmallHeaderTemplate}" Grid.Row="2" FontSize="15">
                                         <PivotItem Header="构造函数">
                                             <ListView x:Name="LstCtors">

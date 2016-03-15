@@ -1,12 +1,11 @@
 ﻿Imports Microsoft.Graphics.Canvas.Brushes
 Namespace Global.Nukepayload2.Graphics.N2Engine
-    Public Class StaticBlock2D(Of TBrush As ICanvasBrush)
+    Public MustInherit Class StaticBlock2D(Of TBrush As ICanvasBrush)
         Inherits StaticVisual
 
-        Public Sub New(width As Single, height As Single, fill As ICanvasBrush)
+        Public Sub New(width As Single, height As Single)
             Me.Width = width
             Me.Height = height
-            Me.Fill = fill
         End Sub
         ''' <summary>
         ''' 碰撞的模式。默认情况下忽略一切碰撞。
@@ -29,10 +28,8 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         <N2DesignerVisible>
         Public Property Height!
         ''' <summary>
-        ''' 表示如何填充这个方块
+        ''' 表示如何填充这个方块。创建绘制资源的时候才会创建它。
         ''' </summary>
-        <N2DesignerVisible(DesignToolSelections.ObjectEditor)>
         Public Property Fill As TBrush
-        Public Overrides ReadOnly Property Presenter As GameVisualView = New BlockView(Me)
     End Class
 End Namespace

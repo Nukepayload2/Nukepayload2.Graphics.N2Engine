@@ -19,5 +19,9 @@
         ''' 用于对齐的网格
         ''' </summary>
         Public Property AlimentGrid As New DesignerGrid
+        ''' <summary>
+        ''' 画布的大小
+        ''' </summary>
+        Public Property CanvasSize As New Size(1920, 1080)
     End Class
 End Namespace

@@ -9,6 +9,7 @@
     <Import_RootNamespace>Nukepayload2.Graphics.N2Engine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Achievement\AchievementGroups.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Side.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\AABB.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\Body.vb" />
@@ -111,12 +112,32 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\DesignerStatus.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\DesignToolSelections.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\N2DesignerVisibleAttribute.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\ToolboxItemVisibleAttribute.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\WorldBuilderSidebarModel.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Difficulty\DifficultyLevels.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Foundation\DeviceInformation.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\ActionStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\AnimationStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\AtlasStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\BuffArtStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\BuffStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\CharacterLevel.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\CharacterStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\CustomAchievement.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\CustomFormationStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\EquipmentStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\GuideRecord.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\GuideState.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\InitialCharacterStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\ItemStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\Mission.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\Objective.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\WeaponStatus.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFile.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFileItem.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFileItemID.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Save\SaveFilesIndex.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Barriers\ImageBlock.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Barriers\LinearGradientBlock.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Barriers\RadialGradientBlock.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Barriers\SolidColorBlock.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\BlockCollisionModes.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\FixedSpriteSheet.vb" />
@@ -125,19 +146,34 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\StaticBlock2D.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Core\TiledBackground.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Barriers\Barrier.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Barriers\CobbleStonePlatform.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Barriers\GrassPlatform.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Barriers\MudPlatform.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\Decorations.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\TreeDecoration.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\WhiteCloudDecoration.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Foundation\InputPointer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Foundation\TerrainCategories.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Foundation\ToolboxItem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Inventories\Inventories.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Inventories\RedKey.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Inventories\SilverKey.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Lights\Lights.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Lights\PointLightspot.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Organs\Dispenser.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Organs\Dropper.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Organs\Organs.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\ParticleSystems\ParticleSystems.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Organs\Repeater.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\ParticleSystems\FlameThrower.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\ParticleSystems\ParticleSystemThrowers.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\ParticleSystems\SparkGenerator.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Tags\Tags.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Tags\TriggerAeraTag.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Tags\TriggerAeraTagEventArgs.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Tags\TriggerAeraTagStayEventArgs.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Tags\WaypointTag.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Units\Cockroach.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Units\QinShihuang.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Units\Units.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Units\UnitDirectionHelper.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Units\UnitDirections.vb" />
@@ -175,6 +211,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Railgun\RailgunParticleSystem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Spark\SparkParticle.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Spark\SparkParticleSystem.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WorldBuilder\WorldBuilderPreviewResources.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Caching\BitmapCacheHelper.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Caching\UIElementExtensions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Designer\ObjectViewer.vb" />
@@ -198,7 +235,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\IGameResourceManager.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\DesignerToolboxViewModel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\ObjectViewerViewModel.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\WorldBuilderSidebarViewModel.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\WorldBuilderPanelViewModel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AnimationViews\BitmapAnimationView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AnimationViews\ProjectileTrackView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Foundation\CanvasAnimatedContainer.vb" />
@@ -223,6 +260,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\WorldBuilderPage.xaml.vb">
       <DependentUpon>WorldBuilderPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\WorldBuilderView.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Documents\引擎功能说明.docx" />
