@@ -19,10 +19,10 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         Public Overridable Sub OnCreateCustomMinimapResource(sender As CanvasAnimatedControl, args As CanvasCreateResourcesEventArgs)
 
         End Sub
-        Public MustOverride Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public MustOverride Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
         Public MustOverride Sub OnGlobalQualityChanged(Quality As GraphicQualityManager)
-        Public Overridable Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
-            OnDraw(sender, DrawingSession)
+        Public Overridable Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
+            OnDraw(sender, DrawingSession, Canvas)
         End Sub
         Public Overridable Sub Dispose() Implements IDisposable.Dispose
 

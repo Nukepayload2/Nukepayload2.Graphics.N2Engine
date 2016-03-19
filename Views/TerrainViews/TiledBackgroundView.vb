@@ -5,7 +5,7 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         Sub New(target As TiledBackground)
             MyBase.New(target)
         End Sub
-        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
             Using tile = New TileEffect() With {
                 .Source = sender.AnimatedImageManager.GetResource(Target.ResourceID),
                 .SourceRectangle = New Rect(0, 0, 58, 58)
@@ -46,11 +46,11 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
             End Using
         End Sub
         '光照效果不要画到小地图上面
-        Public Overrides Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public Overrides Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
             Using tile = New TileEffect() With {
-                .Source = sender.AnimatedImageManager.GetResource(Target.ResourceID),
-                .SourceRectangle = New Rect(0, 0, 58, 58)
-            }
+                    .Source = sender.AnimatedImageManager.GetResource(Target.ResourceID),
+                    .SourceRectangle = New Rect(0, 0, 58, 58)
+                }
                 DrawingSession.DrawImage(tile)
             End Using
         End Sub

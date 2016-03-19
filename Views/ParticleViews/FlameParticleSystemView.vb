@@ -6,7 +6,7 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         Public Sub New(flamePartialSystem As FlameParticleSystem)
             MyBase.New(flamePartialSystem)
         End Sub
-        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
             For Each part In Target.Particles
                 Using textCommandList As New CanvasCommandList(DrawingSession),
                 ds = textCommandList.CreateDrawingSession()

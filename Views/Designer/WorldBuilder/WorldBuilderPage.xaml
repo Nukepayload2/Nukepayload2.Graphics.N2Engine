@@ -23,6 +23,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button ToolTipService.ToolTip="场景工具箱" Click="BtnToggleBurgerL1_Click">
@@ -35,9 +36,10 @@
                 <Button>
                     <Button.Flyout>
                         <MenuFlyout>
+                            <MenuFlyoutItem>打开设计组 (*.n2proj)</MenuFlyoutItem>
                             <MenuFlyoutItem>打开设计 (*.json)</MenuFlyoutItem>
-                            <MenuFlyoutItem>保存设计 (*.json)</MenuFlyoutItem>
-                            <MenuFlyoutItem>另存为设计 (*.json)</MenuFlyoutItem>
+                            <MenuFlyoutItem>保存设计 (*.json,*.n2proj)</MenuFlyoutItem>
+                            <MenuFlyoutItem>另存为设计 (*.json,*.n2proj)</MenuFlyoutItem>
                             <MenuFlyoutSeparator/>
                             <MenuFlyoutItem>保存面板代码 (*.vb)</MenuFlyoutItem>
                             <MenuFlyoutItem>另存为面板代码 (*.vb)</MenuFlyoutItem>
@@ -60,6 +62,30 @@
                         </MenuFlyout>
                     </Button.Flyout>
                     编辑
+                </Button>
+                <Button>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutSubItem Text="项目生成的代码语言">
+                                <MenuFlyoutSubItem.Items>
+                                    <ToggleMenuFlyoutItem IsChecked="True">
+                                        VB
+                                    </ToggleMenuFlyoutItem>
+                                    <MenuFlyoutItem>
+                                        C#
+                                    </MenuFlyoutItem>
+                                </MenuFlyoutSubItem.Items>
+                            </MenuFlyoutSubItem>
+                            <MenuFlyoutItem>粘贴</MenuFlyoutItem>
+                            <MenuFlyoutItem>剪切</MenuFlyoutItem>
+                            <MenuFlyoutItem Click="BtnUndo_Click">撤销 Ctrl+Z</MenuFlyoutItem>
+                            <MenuFlyoutItem>重做</MenuFlyoutItem>
+                            <MenuFlyoutSeparator/>
+                            <MenuFlyoutItem>全选</MenuFlyoutItem>
+                            <MenuFlyoutItem>全不选</MenuFlyoutItem>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                    项目
                 </Button>
                 <Button>
                     <Button.Flyout>
@@ -150,7 +176,7 @@
                         <MenuFlyout>
                             <MenuFlyoutItem>查看官方Win2D文档</MenuFlyoutItem>
                             <MenuFlyoutItem>查看官方Win2D源码</MenuFlyoutItem>
-                            <MenuFlyoutItem>查看Win2D的VB中文文档</MenuFlyoutItem>
+                            <MenuFlyoutItem>查看Win2D的VB中文文档(非官方)</MenuFlyoutItem>
                             <MenuFlyoutItem>在GitHub查看引擎源码</MenuFlyoutItem>
                             <MenuFlyoutItem>关于...</MenuFlyoutItem>
                             <MenuFlyoutItem>反馈...</MenuFlyoutItem>
@@ -160,9 +186,44 @@
                 </Button>
             </StackPanel>
         </ScrollViewer>
-        <Button Grid.Column="2" Click="BtnToggleProp_Click" >
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE15E;" />
+        <ToggleButton x:Name="ChkIsEditMode" Grid.Column="2">
+            <SymbolIcon Symbol="Edit"></SymbolIcon>
+        </ToggleButton>
+        <Button Grid.Column="3" Click="BtnClose_Click" ToolTipService.ToolTip="关闭项目和设计器">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE947;" />
         </Button>
+        <Grid Grid.Column="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <Button Grid.Column="3" Click="BtnToggleProp_Click"  ToolTipService.ToolTip="属性">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE15E;" />
+                </Button>
+                <Button ToolTipService.ToolTip="取消选择工具箱中的项目，恢复普通的鼠标光标/触摸模型。">
+                    <SymbolIcon Symbol="TouchPointer"/>
+                </Button>
+            </StackPanel>
+            <ListBox Grid.Row="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Button ToolTipService.ToolTip="{Binding Description}" Content="{Binding Icon}" Click="{Binding OnClick}">
+                            
+                        </Button>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Row="2">
+                <Button ToolTipService.ToolTip="把常用的操作添加到下面">
+                    <SymbolIcon Symbol="Add"/>
+                </Button>
+                <Button ToolTipService.ToolTip="删除选中的常用操作">
+                    <SymbolIcon Symbol="Delete"/>
+                </Button>
+            </StackPanel>
+        </Grid>
         <SplitView DisplayMode="Inline" x:Name="BurgerL1" OpenPaneLength="80" Grid.Row="1" Grid.ColumnSpan="3">
             <SplitView.Pane>
                 <ListBox x:Name="LstLeftBarLv1" ItemsSource="{Binding Source={StaticResource menudata},Path=ToolboxGroups}">
@@ -174,7 +235,7 @@
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>
-                <SplitView x:Name="BurgerL2" DisplayMode="Inline" OpenPaneLength="150">
+                <SplitView x:Name="BurgerL2" DisplayMode="Inline" OpenPaneLength="100">
                     <SplitView.Pane>
                         <ListBox DataContext="{Binding ElementName=LstLeftBarLv1,Path=SelectedItem}" ItemsSource="{Binding Group}">
                             <ListBox.ItemTemplate>
@@ -191,13 +252,12 @@
                                     <PivotItem Header="设计">
                                         <Grid>
                                             <ContentControl x:Name="GameObjectViewerContainer"/>
-                                            <Canvas x:Name="InkInputAera" ManipulationMode="All" />
                                         </Grid>
                                     </PivotItem>
-                                    <PivotItem Header="map.json">
+                                    <PivotItem Header="CurProjItem.json">
                                         <TextBox x:Name="TxtJson"/>
                                     </PivotItem>
-                                    <PivotItem Header="map.json.vb">
+                                    <PivotItem Header="CurProjItem.json.vb">
                                         <TextBox x:Name="TxtJsonVB" IsReadOnly="True"/>
                                     </PivotItem>
                                 </Pivot>
@@ -223,7 +283,7 @@
                                         <TextBlock Margin="2" Grid.Row="1">类型</TextBlock>
                                         <TextBlock Margin="2" Grid.Column="1" Grid.Row="1">GameVisual</TextBlock>
                                     </Grid>
-                                    <Border Background="Black">
+                                    <Border Background="White" Grid.Row="1">
                                         <Viewbox x:Name="MinimapBox" Height="200" Grid.Row="1">
                                             <local:CanvasAnimatedContainer x:Name="Minimap" />
                                         </Viewbox>

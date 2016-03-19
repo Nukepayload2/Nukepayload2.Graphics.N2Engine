@@ -12,24 +12,24 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
 
         Dim PressPoint As Point
         Dim IsDrawing As Boolean
-        Dim CurRect As New Rectangle With {.Stroke = New SolidColorBrush(Colors.Red), .StrokeThickness = 2}
+        Dim CurRect As New ViewingAeraRectangle(New Rect, Colors.Red) With {.ZIndex = 16}
         Dim DesignStatus As New DesignerStatus
 
         Dim GameView As WorldBuilderView
         Dim GamePanel As WorldBuilderPanelViewModel
         Private Sub WorldBuilderPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-            InkInputAera.Children.Add(CurRect)
-            Canvas.SetZIndex(CurRect, 16)
             [AddHandler](Page.KeyDownEvent, New KeyEventHandler(AddressOf Page_KeyDown), True)
             GamePanel = New WorldBuilderPanelViewModel(DesignStatus.CanvasSize)
             Minimap.Width = DesignStatus.CanvasSize.Width
             Minimap.Height = DesignStatus.CanvasSize.Height
             GameView = New WorldBuilderView(GamePanel, Minimap)
+            GamePanel.AnimObjects.Add(CurRect)
             GameObjectViewerContainer.Content = GameView
+            ChkIsEditMode.IsChecked = True
         End Sub
-        Private Sub InkInputAera_PointerMoved(sender As Object, e As PointerRoutedEventArgs) Handles InkInputAera.PointerMoved
+        Private Sub GameObjectViewerContainer_PointerMoved(sender As Object, e As PointerRoutedEventArgs) Handles GameObjectViewerContainer.PointerMoved
             If IsDrawing Then
-                Dim CurPressPoint = e.GetCurrentPoint(InkInputAera).Position
+                Dim CurPressPoint = e.GetCurrentPoint(GameView.Scroller.Content).Position
                 Dim UpperPoint As Point
                 Dim LowerPoint As Point
                 UpperPoint.X = Math.Min(CurPressPoint.X, PressPoint.X)
@@ -37,36 +37,49 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
                 LowerPoint.X = Math.Max(CurPressPoint.X, PressPoint.X)
                 LowerPoint.Y = Math.Max(CurPressPoint.Y, PressPoint.Y)
                 Dim RectSize = LowerPoint.ToVector2 - UpperPoint.ToVector2
-                CurRect.Width = DesignStatus.AlimentGrid.CeilingAlign(RectSize.X)
-                CurRect.Height = DesignStatus.AlimentGrid.CeilingAlign(RectSize.Y)
-                Canvas.SetLeft(CurRect, DesignStatus.AlimentGrid.FloorAlign(UpperPoint.X))
-                Canvas.SetTop(CurRect, DesignStatus.AlimentGrid.FloorAlign(UpperPoint.Y))
+                Dim a = CurRect.Aera
+                a.Width = DesignStatus.AlimentGrid.CeilingAlign(RectSize.X)
+                a.Height = DesignStatus.AlimentGrid.CeilingAlign(RectSize.Y)
+                a.X = DesignStatus.AlimentGrid.FloorAlign(UpperPoint.X)
+                a.Y = DesignStatus.AlimentGrid.FloorAlign(UpperPoint.Y)
+                CurRect.Aera = a
             End If
         End Sub
-        Private Sub InkInputAera_PointerPressed(sender As Object, e As PointerRoutedEventArgs) Handles InkInputAera.PointerPressed
-            PressPoint = e.GetCurrentPoint(InkInputAera).Position
+        Private Sub GameObjectViewerContainer_PointerPressed(sender As Object, e As PointerRoutedEventArgs) Handles GameObjectViewerContainer.PointerPressed
+            Dim pt = e.GetCurrentPoint(GameView.Scroller.Content)
+            If pt.PointerDevice.PointerDeviceType = Windows.Devices.Input.PointerDeviceType.Mouse Then
+                If pt.Properties.IsRightButtonPressed Then
+                    Return
+                End If
+            End If
+            If GameObjectViewerContainer.ManipulationMode = ManipulationModes.System Then
+                Return
+            End If
+            PressPoint = pt.Position
             IsDrawing = True
-            CurRect.Width = 0
-            CurRect.Height = 0
-            Canvas.SetLeft(CurRect, DesignStatus.AlimentGrid.FloorAlign(PressPoint.X))
-            Canvas.SetTop(CurRect, DesignStatus.AlimentGrid.FloorAlign(PressPoint.Y))
-            InkInputAera.CapturePointer(e.Pointer)
-            CurRect.Visibility = Visibility.Visible
+            Dim a = CurRect.Aera
+            a.Width = 0
+            a.Height = 0
+            a.X = DesignStatus.AlimentGrid.FloorAlign(PressPoint.X)
+            a.Y = DesignStatus.AlimentGrid.FloorAlign(PressPoint.Y)
+            CurRect.Aera = a
+            GameObjectViewerContainer.CapturePointer(e.Pointer)
         End Sub
         Dim rnd As New Random
-        Private Sub InkInputAera_PointerReleased(sender As Object, e As PointerRoutedEventArgs) Handles InkInputAera.PointerReleased
+        Private Sub GameObjectViewerContainer_PointerReleased(sender As Object, e As PointerRoutedEventArgs) Handles GameObjectViewerContainer.PointerReleased
+            If Not IsDrawing Then
+                Return
+            End If
             IsDrawing = False
-            InkInputAera.ReleasePointerCaptures()
-            CurRect.Visibility = Visibility.Collapsed
-            If CurRect.Width < 4 OrElse CurRect.Height < 4 Then
+            GameObjectViewerContainer.ReleasePointerCaptures()
+            If CurRect.Aera.Width < 4 OrElse CurRect.Aera.Height < 4 Then
                 Return
             End If
             Dim buf(2) As Byte
             rnd.NextBytes(buf)
-            Dim placeholder = New Rectangle With {.Width = CurRect.Width, .Height = CurRect.Height, .Fill = New SolidColorBrush(Color.FromArgb(255, buf(0), buf(1), buf(2)))}
-            Canvas.SetLeft(placeholder, Canvas.GetLeft(CurRect))
-            Canvas.SetTop(placeholder, Canvas.GetTop(CurRect))
-            InkInputAera.Children.Add(placeholder)
+            Dim solidBlock As New SolidColorBlock(CurRect.Aera, Color.FromArgb(255, buf(0), buf(1), buf(2)))
+            GamePanel.Add(solidBlock)
+            GameView.RaiseResourceReload()
         End Sub
 
         Private Sub BtnToggleBurgerL1_Click(sender As Object, e As RoutedEventArgs)
@@ -81,12 +94,12 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         End Sub
 
         '选择Xaml对象
-        Private Sub InkInputAera_Tapped(sender As Object, e As TappedRoutedEventArgs) Handles InkInputAera.Tapped
-            Dim selectedobj = From o In VisualTreeHelper.FindElementsInHostCoordinates(e.GetPosition(Me), InkInputAera)
+        Private Sub GameObjectViewerContainer_Tapped(sender As Object, e As TappedRoutedEventArgs) Handles GameObjectViewerContainer.Tapped
+            Dim selectedobj = From o In VisualTreeHelper.FindElementsInHostCoordinates(e.GetPosition(Me), GameObjectViewerContainer)
                               Order By Canvas.GetZIndex(o) Descending
             If selectedobj.Any Then
                 Dim elem = selectedobj.First
-                Debug.WriteLine($"选择了对象: 左:{Canvas.GetLeft(elem)}, 上:{Canvas.GetTop(elem)}")
+                Debug.WriteLine($"选择了Xaml对象: 左:{Canvas.GetLeft(elem)}, 上:{Canvas.GetTop(elem)}")
             Else
                 Debug.WriteLine("什么都没选择")
             End If
@@ -117,9 +130,9 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         End Sub
 
         Private Sub Undo()
-            Dim count = InkInputAera.Children.Count
+            Dim count = GamePanel.StaticObjects.Count
             If count > 0 Then
-                InkInputAera.Children.RemoveAt(count - 1)
+                GamePanel.StaticObjects.RemoveAt(count - 1)
             End If
         End Sub
 
@@ -173,6 +186,14 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
 
         Private Sub BtnUndo_Click(sender As Object, e As RoutedEventArgs)
             Undo()
+        End Sub
+
+        Private Sub ChkIsEditMode_Checked(sender As Object, e As RoutedEventArgs) Handles ChkIsEditMode.Checked
+            GameObjectViewerContainer.ManipulationMode = ManipulationModes.All
+        End Sub
+
+        Private Sub ChkIsEditMode_Unchecked(sender As Object, e As RoutedEventArgs) Handles ChkIsEditMode.Unchecked
+            GameObjectViewerContainer.ManipulationMode = ManipulationModes.System
         End Sub
     End Class
 End Namespace

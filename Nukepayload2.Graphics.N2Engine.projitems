@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Achievement\AchievementGroups.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Authentication\SinaAuthenticationResult.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Authentication\SinaAuthenticationBroker.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Battle\Side.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\AABB.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\Body.vb" />
@@ -109,11 +111,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\WorldManifold.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Box2DTranslation\XForm.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\DesignerGrid.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\DesignerStatus.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\DesignToolSelections.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\GeneratedCodeLanguages.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\N2DesignerProject.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\N2DesignerProjectItem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\N2DesignerVisibleAttribute.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\ToolboxItemVisibleAttribute.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\WorldBuilderSidebarModel.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Designer\WorldBuilder\WorldBuilderPreviewResources.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Difficulty\DifficultyLevels.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Foundation\DeviceInformation.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LocalData\ActionStatus.vb" />
@@ -211,7 +216,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Railgun\RailgunParticleSystem.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Spark\SparkParticle.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Particles\Spark\SparkParticleSystem.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\WorldBuilder\WorldBuilderPreviewResources.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Caching\BitmapCacheHelper.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Caching\UIElementExtensions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Designer\ObjectViewer.vb" />
@@ -227,17 +231,33 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Shapes\LightClipCalculator.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Shapes\Vector2Extensions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Tasks\WaitTask.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Testing\ReallyWorthTable.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Debugging\ConsoleClient.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Debugging\ConsoleSingleLineCommand.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Designer\DesignerStatus.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Designer\DesignerToolboxViewModel.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Designer\N2DesignerShortcut.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Designer\ObjectViewerViewModel.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Designer\WorldBuilder\WorldBuilderPanelViewModel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\GamePanel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\GameResourceManager.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\GraphicQualityManager.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Foundation\IGameResourceManager.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\DesignerToolboxViewModel.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\ObjectViewerViewModel.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WorldBuilder\WorldBuilderPanelViewModel.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AnimationViews\BitmapAnimationView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AnimationViews\ProjectileTrackView.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Designer\CommonDialogs\ColorPickerDialog.xaml.vb">
+      <DependentUpon>ColorPickerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Designer\CommonDialogs\TileResourceHelperDialog.xaml.vb">
+      <DependentUpon>TileResourceHelperDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Designer\WorldBuilder\ObjectViewerPage.xaml.vb">
+      <DependentUpon>ObjectViewerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Designer\WorldBuilder\WorldBuilderPage.xaml.vb">
+      <DependentUpon>WorldBuilderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Designer\WorldBuilder\WorldBuilderView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Foundation\CanvasAnimatedContainer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Foundation\CanvasContainer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Foundation\DynamicGameVisualView.vb" />
@@ -251,16 +271,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ParticleViews\SparkParticleSystemView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TerrainViews\BlockView.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TerrainViews\TiledBackgroundView.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\ObjectViewerPage.xaml.vb">
-      <DependentUpon>ObjectViewerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\TileResourceHelperDialog.xaml.vb">
-      <DependentUpon>TileResourceHelperDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\WorldBuilderPage.xaml.vb">
-      <DependentUpon>WorldBuilderPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\WorldBuilderView.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Documents\引擎功能说明.docx" />
@@ -272,15 +282,19 @@
     <Folder Include="$(MSBuildThisFileDirectory)Models\Particles\Storm\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\ObjectViewerPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\Designer\CommonDialogs\ColorPickerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\TileResourceHelperDialog.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\Designer\CommonDialogs\TileResourceHelperDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\WorldBuilder\WorldBuilderPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Views\Designer\WorldBuilder\ObjectViewerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\Designer\WorldBuilder\WorldBuilderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,6 +7,11 @@
             Me.Color = Color
         End Sub
         <N2DesignerVisible>
+        Sub New(Region As Rect, Color As Color)
+            MyBase.New(Region)
+            Me.Color = Color
+        End Sub
+        <N2DesignerVisible>
         Public Property Color As Color
 
         Public Overrides ReadOnly Property Presenter As GameVisualView = New BlockView(Of Brushes.CanvasSolidColorBrush)(Me,

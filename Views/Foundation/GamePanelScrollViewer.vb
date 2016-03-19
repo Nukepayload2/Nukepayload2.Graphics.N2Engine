@@ -15,14 +15,17 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
             Me.MinimapCanvas = MinimapCanvas
             Content = Nothing
             _Scroller = New ScrollViewer With {
-            .HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
-            .VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
-            .Content = PanelParent,
-            .ZoomMode = ZoomMode.Enabled
-        }
+                .HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                .VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                .Content = PanelParent,
+                .ZoomMode = ZoomMode.Enabled
+            }
             Content = Scroller
         End Sub
-
+        Public Overrides Sub RaiseResourceReload()
+            MyBase.RaiseResourceReload()
+            MinimapCanvas.Canvas.DpiScale -= DpiChange
+        End Sub
         Dim DrawMinimap As New TypedEventHandler(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
         Sub(sender, args)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
@@ -31,12 +34,12 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
                     Using cl = New CanvasCommandList(args.DrawingSession)
                         Using ds = cl.CreateDrawingSession
                             For Each a In Panel.AnimObjects
-                                a.Presenter.OnDrawMinimap(Me, ds)
+                                a.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
                             Next
                             For Each s In Panel.StaticObjects
-                                s.Presenter.OnDrawMinimap(Me, ds)
+                                s.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
                             Next
-                            Panel.ViewingAera.Presenter.OnDrawMinimap(Me, ds)
+                            Panel.ViewingAera.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
                         End Using
                         args.DrawingSession.DrawImage(cl)
                     End Using
@@ -110,6 +113,9 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
                                        For Each obj In Panel.AnimObjects
                                            obj.Presenter.OnCreateCustomMinimapResource(sender, args)
                                        Next
+                                       For Each obj In Panel.StaticObjects
+                                           obj.Presenter.OnCreateCustomMinimapResource(sender, args)
+                                       Next
                                    End Function).Invoke.AsAsyncAction)
         End Sub
 
@@ -117,13 +123,24 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
             DrawMinimap(sender, args)
         End Sub
 
-        Private Sub GamePanelScrollViewer_PointerWheelChanged(sender As Object, e As PointerRoutedEventArgs) Handles Me.PointerWheelChanged
+        Private Sub GamePanelScrollViewer_PointerWheelChanged(sender As Object, e As PointerRoutedEventArgs)
             Dim delta = e.GetCurrentPoint(Me).Properties.MouseWheelDelta
             If delta <> 0 Then
-                lastzoom += delta / 10
+                lastzoom -= delta / 3000
                 Scroller.ChangeView(Nothing, Nothing, lastzoom)
                 e.Handled = True
             End If
+        End Sub
+
+        Dim OnPrinterMoveHandler As New PointerEventHandler(AddressOf GamePanelScrollViewer_PointerWheelChanged)
+        Private Sub GamePanelScrollViewer_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+            Scroller.AddHandler(ScrollViewer.PointerWheelChangedEvent,
+                                OnPrinterMoveHandler, True)
+        End Sub
+
+        Private Sub GamePanelScrollViewer_Unloaded(sender As Object, e As RoutedEventArgs) Handles Me.Unloaded
+            Scroller.RemoveHandler(ScrollViewer.PointerWheelChangedEvent,
+                                OnPrinterMoveHandler)
         End Sub
     End Class
 

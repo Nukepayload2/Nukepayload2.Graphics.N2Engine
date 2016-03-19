@@ -1,6 +1,6 @@
 # Nukepayload2.Graphics.N2Engine
-<h3>适用于Win2D的图形框架</h3><br />
-<h4>version 1.0.699 alpha</h4><br />
+<h3>适用于Win2D的游戏框架</h3><br />
+<h4>version 1.0.827 alpha</h4><br />
 <h5>目前的版本是早期版本，仍然会有巨大改动</h5><br />
 <h6>这份源代码使用Ms-PL协议进行公开</h6>
 <a href="https://msdn.microsoft.com/zh-cn/vstudio/bb894665.aspx">https://msdn.microsoft.com/zh-cn/vstudio/bb894665.aspx</a><br />
@@ -172,6 +172,22 @@
             </td>
             <td>
                 编写中
+            </td>
+        </tr>
+        <tr>
+            <td>
+                本地数据
+            </td>
+            <td>
+                编写中
+            </td>
+        </tr>
+        <tr>
+            <td>
+                新浪 Web API 认证
+            </td>
+            <td>
+                测试中
             </td>
         </tr>
         <tr>

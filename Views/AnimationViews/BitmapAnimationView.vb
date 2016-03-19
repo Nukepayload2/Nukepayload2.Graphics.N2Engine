@@ -4,7 +4,7 @@
         Sub New(target As BitmapAnimation)
             MyBase.New(target)
         End Sub
-        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
             Using cl = New CanvasCommandList(DrawingSession), ds = cl.CreateDrawingSession
                 Dim OriginalImage = Target.Frames(Target.GetImageIndex(Target.FrameCount))
                 Dim CurImg As ICanvasImage = OriginalImage
@@ -26,7 +26,7 @@
             End Using
         End Sub
 
-        Public Overrides Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public Overrides Sub OnDrawMinimap(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
             '这一类动画画到小地图上回影响小地图的效果，不要在小地图绘制。
 
         End Sub

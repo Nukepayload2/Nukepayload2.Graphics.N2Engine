@@ -7,7 +7,7 @@
         Sub New(Target As ViewingAeraRectangle)
             MyBase.New(Target)
         End Sub
-        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
             DrawingSession.DrawRectangle(Target.Aera, Target.BorderColor, 10)
         End Sub
 

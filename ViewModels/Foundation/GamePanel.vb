@@ -57,9 +57,10 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         ''' </summary>
         Public Sub Add(obj As GameVisual)
             If obj Is Nothing Then Throw New ArgumentNullException(NameOf(obj))
-            If obj.GetType.IsAssignableFrom(GetType(StaticVisual)) Then
+            Dim objType = obj.GetType
+            If GetType(StaticVisual).IsAssignableFrom(objType) Then
                 StaticObjects.Add(DirectCast(obj, StaticVisual))
-            ElseIf obj.GetType.IsAssignableFrom(GetType(AnimatedVisual)) Then
+            ElseIf GetType(AnimatedVisual).IsAssignableFrom(objType) Then
                 AnimObjects.Add(DirectCast(obj, AnimatedVisual))
             Else
                 Throw New ArgumentException("类型不是AnimatedVisual也不是StaticVisual")

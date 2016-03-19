@@ -2,8 +2,12 @@
 Namespace Global.Nukepayload2.Graphics.N2Engine
     Public MustInherit Class StaticBlock2D(Of TBrush As ICanvasBrush)
         Inherits StaticVisual
-
-        Public Sub New(width As Single, height As Single)
+        Sub New(Region As Rect)
+            Me.Width = Region.Width
+            Me.Height = Region.Height
+            Location = New Vector2(Region.X, Region.Y)
+        End Sub
+        Sub New(width As Single, height As Single)
             Me.Width = width
             Me.Height = height
         End Sub
@@ -30,6 +34,6 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         ''' <summary>
         ''' 表示如何填充这个方块。创建绘制资源的时候才会创建它。
         ''' </summary>
-        Public Property Fill As TBrush
+        Public Property Fill As New Dictionary(Of ICanvasResourceCreator, TBrush)
     End Class
 End Namespace

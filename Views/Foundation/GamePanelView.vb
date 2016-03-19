@@ -28,6 +28,14 @@
             Content = PanelParent
         End Sub
 
+        Protected DpiChange As Single = 0.001F
+
+        Public Overridable Sub RaiseResourceReload()
+            StaticCanvas.Canvas.DpiScale += DpiChange
+            AnimatedCanvas.Canvas.DpiScale += DpiChange
+            DpiChange = -DpiChange
+        End Sub
+
         Private Sub AnimatedCanvas_CreateResources(sender As CanvasAnimatedControl, args As CanvasCreateResourcesEventArgs) Handles AnimatedCanvas.CreateResources
             args.TrackAsyncAction((Async Function()
                                        If _AnimatedImageManager Is Nothing Then _AnimatedImageManager = InitializeImageManager(sender)
@@ -48,16 +56,14 @@
             Catch ex As Exception
             End Try
         End Sub
-        Public ReadOnly Property Timing As CanvasTimingInformation?
         Dim DrawAnim As New Action(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
         Sub(sender, args)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
-            _Timing = New CanvasTimingInformation?(args.Timing)
             Using lck = sender.Device.Lock
                 Using cl = New CanvasCommandList(args.DrawingSession)
                     Using ds = cl.CreateDrawingSession
                         For Each a In From obj In Panel.AnimObjects Order By obj.ZIndex
-                            a.Presenter.OnDraw(Me, ds)
+                            a.Presenter.OnDraw(Me, ds, AnimatedCanvas.Canvas)
                         Next
                     End Using
                     args.DrawingSession.DrawImage(cl)
@@ -80,7 +86,7 @@
                 Using cl = New CanvasCommandList(args.DrawingSession)
                     Using ds = cl.CreateDrawingSession
                         For Each a In From obj In Panel.StaticObjects Order By obj.ZIndex
-                            a.Presenter.OnDraw(Me, ds)
+                            a.Presenter.OnDraw(Me, ds, StaticCanvas.Canvas)
                         Next
                     End Using
                     args.DrawingSession.DrawImage(cl)
@@ -98,7 +104,7 @@
                                        If _StaticImageManager Is Nothing Then _StaticImageManager = InitializeImageManager(sender)
                                        Debug.WriteLine("加载静态图片资源")
                                        Await StaticImageManager.LoadAsync(sender)
-                                       For Each obj In Panel.AnimObjects
+                                       For Each obj In Panel.StaticObjects
                                            obj.Presenter.OnCreateCustomStaticResource(sender, args)
                                        Next
                                    End Function).Invoke.AsAsyncAction)
@@ -118,7 +124,6 @@
                     AnimatedImageManager.Dispose()
                     StaticImageManager.Dispose()
                     Panel.Dispose()
-                    _Timing = New CanvasTimingInformation?
                 End If
 
                 ' TODO: 释放未托管资源(未托管对象)并在以下内容中替代 Finalize()。

@@ -4,7 +4,7 @@
         Sub New(Target As SparkParticleSystem)
             MyBase.New(Target)
         End Sub
-        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession)
+        Public Overrides Sub OnDraw(sender As GamePanelView, DrawingSession As CanvasDrawingSession, Canvas As ICanvasResourceCreator)
             '绘制当前粒子系统的代码
             Using cl As New CanvasCommandList(DrawingSession), ds = cl.CreateDrawingSession
                 For Each part In Target.Particles
