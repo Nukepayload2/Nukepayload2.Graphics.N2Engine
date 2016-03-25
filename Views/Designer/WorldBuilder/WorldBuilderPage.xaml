@@ -36,10 +36,13 @@
                 <Button>
                     <Button.Flyout>
                         <MenuFlyout>
+                            <MenuFlyoutItem>新建设计组 (*.n2proj)</MenuFlyoutItem>
                             <MenuFlyoutItem>打开设计组 (*.n2proj)</MenuFlyoutItem>
-                            <MenuFlyoutItem>打开设计 (*.json)</MenuFlyoutItem>
-                            <MenuFlyoutItem>保存设计 (*.json,*.n2proj)</MenuFlyoutItem>
-                            <MenuFlyoutItem>另存为设计 (*.json,*.n2proj)</MenuFlyoutItem>
+                            <MenuFlyoutItem>保存设计组 (*.json,*.n2proj)</MenuFlyoutItem>
+                            <MenuFlyoutItem>新建设计 (*.json)</MenuFlyoutItem>
+                            <MenuFlyoutItem>添加设计 (*.json)</MenuFlyoutItem>
+                            <MenuFlyoutItem>删除设计 (*.json)</MenuFlyoutItem>
+                            <MenuFlyoutItem>保存当前设计 (*.json)</MenuFlyoutItem>
                             <MenuFlyoutSeparator/>
                             <MenuFlyoutItem>保存面板代码 (*.vb)</MenuFlyoutItem>
                             <MenuFlyoutItem>另存为面板代码 (*.vb)</MenuFlyoutItem>
@@ -76,13 +79,9 @@
                                     </MenuFlyoutItem>
                                 </MenuFlyoutSubItem.Items>
                             </MenuFlyoutSubItem>
-                            <MenuFlyoutItem>粘贴</MenuFlyoutItem>
-                            <MenuFlyoutItem>剪切</MenuFlyoutItem>
-                            <MenuFlyoutItem Click="BtnUndo_Click">撤销 Ctrl+Z</MenuFlyoutItem>
-                            <MenuFlyoutItem>重做</MenuFlyoutItem>
-                            <MenuFlyoutSeparator/>
-                            <MenuFlyoutItem>全选</MenuFlyoutItem>
-                            <MenuFlyoutItem>全不选</MenuFlyoutItem>
+                            <MenuFlyoutItem>排除和恢复项...</MenuFlyoutItem>
+                            <MenuFlyoutItem>新建文件夹</MenuFlyoutItem>
+                            <MenuFlyoutItem>高级属性...</MenuFlyoutItem>
                         </MenuFlyout>
                     </Button.Flyout>
                     项目
@@ -199,8 +198,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel>
-                <Button Grid.Column="3" Click="BtnToggleProp_Click"  ToolTipService.ToolTip="属性">
+                <Button Click="BtnToggleProp_Click"  ToolTipService.ToolTip="属性">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE15E;" />
+                </Button>
+                <Button ToolTipService.ToolTip="查看项目文件树">
+                    <SymbolIcon Symbol="Manage"/>
                 </Button>
                 <Button ToolTipService.ToolTip="取消选择工具箱中的项目，恢复普通的鼠标光标/触摸模型。">
                     <SymbolIcon Symbol="TouchPointer"/>
@@ -209,8 +211,8 @@
             <ListBox Grid.Row="1">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button ToolTipService.ToolTip="{Binding Description}" Content="{Binding Icon}" Click="{Binding OnClick}">
-                            
+                        <Button ToolTipService.ToolTip="{Binding Description}" Content="{Binding Icon}">
+
                         </Button>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -248,7 +250,7 @@
                     <SplitView.Content>
                         <SplitView Name="BurgerL3" PanePlacement="Right" DisplayMode="Inline">
                             <SplitView.Content>
-                                <Pivot Padding="-8,-4,-8,0" Margin="0,0,-16,0" HeaderTemplate="{StaticResource PivotSmallHeaderTemplate}">
+                                <Pivot Padding="-8,-4,-8,0" Margin="0,0,0,0" HeaderTemplate="{StaticResource PivotSmallHeaderTemplate}">
                                     <PivotItem Header="设计">
                                         <Grid>
                                             <ContentControl x:Name="GameObjectViewerContainer"/>
@@ -279,7 +281,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <TextBlock>名称</TextBlock>
-                                        <TextBox Grid.Column="1"></TextBox>
+                                        <TextBox Grid.Column="1" PlaceholderText="&lt;空&gt;"></TextBox>
                                         <TextBlock Margin="2" Grid.Row="1">类型</TextBlock>
                                         <TextBlock Margin="2" Grid.Column="1" Grid.Row="1">GameVisual</TextBlock>
                                     </Grid>
@@ -288,16 +290,21 @@
                                             <local:CanvasAnimatedContainer x:Name="Minimap" />
                                         </Viewbox>
                                     </Border>
-                                    <Pivot Padding="-8,-4,-8,0" Margin="0,0,-16,0" HeaderTemplate="{StaticResource PivotSmallHeaderTemplate}" Grid.Row="2" FontSize="15">
-                                        <PivotItem Header="构造函数">
-                                            <ListView x:Name="LstCtors">
+                                    <Pivot Padding="-8,-4,0,0" HeaderTemplate="{StaticResource PivotSmallHeaderTemplate}" Grid.Row="2" FontSize="15">
+                                        <PivotItem HorizontalAlignment="Left" Width="312" Header="构造函数">
+                                            <ListBox Background="White" x:Name="LstCtors" Grid.Row="1">
+                                                <ListBoxItem>
+                                                    <StackPanel>
+                                                        <TextBlock><Run Foreground="Blue">Sub New</Run>(location <Run Foreground="Blue">As</Run><Run Text=" "></Run><Run Foreground="DodgerBlue">Vector2</Run>)</TextBlock>
 
-                                            </ListView>
+                                                    </StackPanel>
+                                                </ListBoxItem>
+                                            </ListBox>
                                         </PivotItem>
-                                        <PivotItem Header="属性和字段">
-                                            <ListView x:Name="LstProps">
+                                        <PivotItem HorizontalAlignment="Left" Width="312" Header="参数,属性和字段">
+                                            <ListBox Background="White" x:Name="LstProps">
 
-                                            </ListView>
+                                            </ListBox>
                                         </PivotItem>
                                     </Pivot>
                                 </Grid>

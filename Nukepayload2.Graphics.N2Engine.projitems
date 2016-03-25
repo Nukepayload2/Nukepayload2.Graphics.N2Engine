@@ -155,6 +155,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Barriers\GrassPlatform.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Barriers\MudPlatform.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\Decorations.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\RandomSolidColorBlock.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\TreeDecoration.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Decorations\WhiteCloudDecoration.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Terrain\Designer\Foundation\InputPointer.vb" />
