@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Graphics.Canvas.Brushes
+﻿Option Strict Off
+Imports Microsoft.Graphics.Canvas.Brushes
 Namespace Global.Nukepayload2.Graphics.N2Engine
     Public MustInherit Class StaticBlock2D(Of TBrush As ICanvasBrush)
         Inherits StaticVisual

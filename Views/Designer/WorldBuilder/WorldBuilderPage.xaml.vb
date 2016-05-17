@@ -1,8 +1,5 @@
 ﻿' “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
-Imports MysteryStates
-Imports Nukepayload2.Graphics.N2Engine
-Imports Nukepayload2.VisualBasicExtensions.UWP
-Imports Windows.UI.Xaml.Shapes
+Option Strict Off
 Namespace Global.Nukepayload2.Graphics.N2Engine
     ''' <summary>
     ''' 可用于自身或导航至 Frame 内部的空白页。
@@ -194,6 +191,14 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
 
         Private Sub ChkIsEditMode_Unchecked(sender As Object, e As RoutedEventArgs) Handles ChkIsEditMode.Unchecked
             GameObjectViewerContainer.ManipulationMode = ManipulationModes.System
+        End Sub
+
+        Private Sub BtnShortcut_Click(sender As Object, e As TappedRoutedEventArgs)
+            Dim btn = DirectCast(sender, FrameworkElement)
+            Dim shortcut = TryCast(btn.DataContext, N2DesignerShortcut)
+            If shortcut IsNot Nothing Then
+                shortcut.OnClick?.Invoke(sender, e)
+            End If
         End Sub
     End Class
 End Namespace

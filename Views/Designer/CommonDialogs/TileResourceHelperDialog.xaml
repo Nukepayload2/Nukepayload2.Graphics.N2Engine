@@ -1,5 +1,5 @@
 ﻿<ContentDialog
-    x:Class="MysteryStates.TileResourceHelperDialog"
+    x:Class="Nukepayload2.Graphics.N2Engine.TileResourceHelperDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MysteryStates"

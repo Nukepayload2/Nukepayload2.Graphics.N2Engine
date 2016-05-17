@@ -10,6 +10,7 @@
         <DataTemplate x:Key="PivotSmallHeaderTemplate">
             <ContentPresenter Content="{Binding }" FontSize="16"/>
         </DataTemplate>
+        <local:DesignerShortcutViewModel x:Key="shortcuts"/>
     </Page.Resources>
     <Grid RequestedTheme="Light" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -208,12 +209,12 @@
                     <SymbolIcon Symbol="TouchPointer"/>
                 </Button>
             </StackPanel>
-            <ListBox Grid.Row="1">
+            <ListBox Grid.Row="1" ItemsSource="{Binding Source={StaticResource shortcuts},Path=Items}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button ToolTipService.ToolTip="{Binding Description}" Content="{Binding Icon}">
+                        <ListBoxItem Margin="-10" Width="37" Height="37" ToolTipService.ToolTip="{Binding Description}" Content="{Binding Icon}" Tapped="BtnShortcut_Click">
 
-                        </Button>
+                        </ListBoxItem>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

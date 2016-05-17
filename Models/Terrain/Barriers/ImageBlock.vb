@@ -13,7 +13,7 @@
             Function(sender, e)
                 e.TrackAsyncAction((Async Function()
                                         _CurrentBrush = New Brushes.CanvasImageBrush(sender, Await CanvasBitmap.LoadAsync(sender, ImageName))
-                                    End Function).Invoke)
+                                    End Function).Invoke.AsAsyncAction)
                 Return CurrentBrush
             End Function)
     End Class

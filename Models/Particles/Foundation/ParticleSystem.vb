@@ -6,7 +6,7 @@
     Public MustInherit Class ParticleSystem(Of TParticle As IParticle)
         Inherits AnimatedVisual
         Implements IParticleSystem(Of TParticle)
-
+        Dim lock As New Object
         Public MustOverride Property Particles As Queue(Of TParticle) Implements IParticleSystem(Of TParticle).Particles
         Public MustOverride Property SpawnCount As Integer Implements IParticleSystem(Of TParticle).SpawnCount
         Public MustOverride Property SpawnDuration As Integer Implements IParticleSystem(Of TParticle).SpawnDuration
@@ -16,9 +16,11 @@
             MyBase.Update(sender)
             If SpawnDuration >= 0 Then
                 If SpawnInterval <= 1 OrElse (SpawnDuration Mod (SpawnInterval - 1) <= 0) Then
-                    For i = 1 To SpawnCount
-                        Particles.Enqueue(CreateParticle())
-                    Next
+                    SyncLock lock
+                        For i = 1 To SpawnCount
+                            Particles.Enqueue(CreateParticle())
+                        Next
+                    End SyncLock
                 End If
                 SpawnDuration -= 1
             Else
@@ -33,10 +35,16 @@
                     deq += 1
                 End If
             Next
-            For i = 1 To deq
-                Particles.Dequeue()
-            Next
+            SyncLock lock
+                For i = 1 To deq
+                    Particles.Dequeue()
+                    OnParticleRemoved()
+                Next
+            End SyncLock
+        End Sub
+
+        Protected Overridable Sub OnParticleRemoved()
+
         End Sub
     End Class
-
 End Namespace

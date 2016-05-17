@@ -17,6 +17,14 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
             End If
         End Sub
         <Extension>
+        Public Function WithLength(this As Vector2, sPutNum As Single) As Vector2
+            Dim tempMag As Single = this.Length
+            If tempMag > 0 Then
+                this = New Vector2(this.X * (sPutNum / tempMag), this.Y * (sPutNum / tempMag))
+            End If
+            Return this
+        End Function
+        <Extension>
         Public Sub Rotate(ByRef this As Vector2, gAngle As Single)
             Dim x1, y1 As Single
             x1 = this.X * Math.Cos(gAngle) - this.Y * Math.Sin(gAngle)

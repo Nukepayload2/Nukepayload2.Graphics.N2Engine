@@ -2,7 +2,7 @@
     Public Module BinaryMath
         <Extension>
         Function BitContains(source As Integer, value As Integer) As Boolean
-            Return source And value = value
+            Return (source And value) = value
         End Function
     End Module
 End Namespace
