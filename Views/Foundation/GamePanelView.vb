@@ -59,15 +59,13 @@
         Dim DrawAnim As New Action(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
         Sub(sender, args)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
-            Using lck = sender.Device.Lock
-                Using cl = New CanvasCommandList(args.DrawingSession)
-                    Using ds = cl.CreateDrawingSession
-                        For Each a In From obj In Panel.AnimObjects Order By obj.ZIndex
-                            a.Presenter.OnDraw(Me, ds, AnimatedCanvas.Canvas)
-                        Next
-                    End Using
-                    args.DrawingSession.DrawImage(cl)
+            Using cl = New CanvasCommandList(args.DrawingSession)
+                Using ds = cl.CreateDrawingSession
+                    For Each a In From obj In Panel.AnimObjects Order By obj.ZIndex
+                        a.Presenter.OnDraw(Me, ds, AnimatedCanvas.Canvas)
+                    Next
                 End Using
+                args.DrawingSession.DrawImage(cl)
             End Using
             Panel.Update()
         End Sub)
@@ -82,15 +80,13 @@
         Dim DrawStatic As New Action(Of CanvasDrawEventArgs)(
         Sub(args As CanvasDrawEventArgs)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
-            Using lck = args.DrawingSession.Device.Lock
-                Using cl = New CanvasCommandList(args.DrawingSession)
-                    Using ds = cl.CreateDrawingSession
-                        For Each a In From obj In Panel.StaticObjects Order By obj.ZIndex
-                            a.Presenter.OnDraw(Me, ds, StaticCanvas.Canvas)
-                        Next
-                    End Using
-                    args.DrawingSession.DrawImage(cl)
+            Using cl = New CanvasCommandList(args.DrawingSession)
+                Using ds = cl.CreateDrawingSession
+                    For Each a In From obj In Panel.StaticObjects Order By obj.ZIndex
+                        a.Presenter.OnDraw(Me, ds, StaticCanvas.Canvas)
+                    Next
                 End Using
+                args.DrawingSession.DrawImage(cl)
             End Using
         End Sub)
 

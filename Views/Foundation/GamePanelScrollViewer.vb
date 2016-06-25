@@ -29,23 +29,18 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         Dim DrawMinimap As New TypedEventHandler(Of ICanvasAnimatedControl, CanvasAnimatedDrawEventArgs)(
         Sub(sender, args)
             '仅绘制，不要试图在这里添加任何操纵可视对象状态的逻辑
-            Try
-                Using lck = sender.Device.Lock
-                    Using cl = New CanvasCommandList(args.DrawingSession)
-                        Using ds = cl.CreateDrawingSession
-                            For Each a In Panel.AnimObjects
-                                a.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
-                            Next
-                            For Each s In Panel.StaticObjects
-                                s.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
-                            Next
-                            Panel.ViewingAera.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
-                        End Using
-                        args.DrawingSession.DrawImage(cl)
-                    End Using
+            Using cl = New CanvasCommandList(args.DrawingSession)
+                Using ds = cl.CreateDrawingSession
+                    For Each a In Panel.AnimObjects
+                        a.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
+                    Next
+                    For Each s In Panel.StaticObjects
+                        s.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
+                    Next
+                    Panel.ViewingAera.Presenter.OnDrawMinimap(Me, ds, MinimapCanvas.Canvas)
                 End Using
-            Catch
-            End Try
+                args.DrawingSession.DrawImage(cl)
+            End Using
         End Sub)
 
 #Region "处理用户输入相关的运镜逻辑"
