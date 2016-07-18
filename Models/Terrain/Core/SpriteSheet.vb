@@ -2,8 +2,11 @@
     Public MustInherit Class SpriteSheet
         Implements IDisposable
         Public ReadOnly Property Source As CanvasBitmap
+        ''' <summary>
+        ''' 所需图像区域的起点
+        ''' </summary>
         Public ReadOnly Property Origin As Vector2
-
+        Public Property Name As String
         Public Sub New(bitmap As CanvasBitmap, origin As Vector2)
             Me.Source = bitmap
             Me.Origin = origin

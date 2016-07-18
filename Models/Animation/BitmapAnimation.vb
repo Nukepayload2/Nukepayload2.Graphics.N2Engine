@@ -68,7 +68,7 @@
         ''' <summary>
         ''' 重写默认的循环行为
         ''' </summary>
-        Public Property LoopInformation As LoopInformation
+        Public Property LoopInformation As AnimatioLoopInformation
         ''' <summary>
         ''' 计算当前所处的下标
         ''' </summary>

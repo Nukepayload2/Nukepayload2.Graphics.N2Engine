@@ -1,4 +1,6 @@
-﻿Namespace Global.Nukepayload2.Graphics.N2Engine
+﻿Imports Nukepayload2.UI.UWP
+
+Namespace Global.Nukepayload2.Graphics.N2Engine
     Public Class DesignerShortcutViewModel
         Public Property Items As New List(Of N2DesignerShortcut)
         Sub New()

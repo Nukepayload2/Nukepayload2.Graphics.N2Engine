@@ -2,7 +2,7 @@
     ''' <summary>
     ''' 动画循环相关
     ''' </summary>
-    Public Class LoopInformation
+    Public Class AnimatioLoopInformation
         ''' <summary>
         ''' 一共最多播放多少遍
         ''' </summary>

@@ -1,5 +1,8 @@
-﻿' “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
-Option Strict Off
+﻿Option Strict Off
+' “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
+Imports MysteryStates
+Imports Nukepayload2.VisualBasicExtensions.UWP
+
 Namespace Global.Nukepayload2.Graphics.N2Engine
     ''' <summary>
     ''' 可用于自身或导航至 Frame 内部的空白页。

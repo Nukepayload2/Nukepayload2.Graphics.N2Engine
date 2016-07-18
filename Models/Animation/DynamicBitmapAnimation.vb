@@ -4,6 +4,7 @@
     ''' </summary>
     Public Class DynamicBitmapAnimation
         Inherits BitmapAnimation
+        Implements IDynamicTag
         ''' <summary>
         ''' 仅使用图像列表初始化
         ''' </summary>
@@ -43,6 +44,6 @@
         ''' <summary>
         ''' 用于存储拓展的属性。使用<see cref="Dynamic.ExpandoObject"/>存放内容。使用此成员时请设置Option Strict Off (Visual Basic) 或者用 dynamic 关键字 (Visual C#)
         ''' </summary>
-        Public ReadOnly Property DynamicBag As Object = New Dynamic.ExpandoObject
+        Public ReadOnly Property Tag As Object = New Dynamic.ExpandoObject Implements IDynamicTag.Tag
     End Class
 End Namespace

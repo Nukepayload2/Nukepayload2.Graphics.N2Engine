@@ -1,7 +1,10 @@
 ﻿Option Strict Off
 Imports Microsoft.Graphics.Canvas.Brushes
 Namespace Global.Nukepayload2.Graphics.N2Engine
-    Public MustInherit Class StaticBlock2D(Of TBrush As ICanvasBrush)
+    ''' <summary>
+    ''' 静态呈现的带有碰撞功能的方块的游戏对象的基类
+    ''' </summary>
+    Public MustInherit Class StaticBlock2D
         Inherits StaticVisual
         Sub New(Region As Rect)
             Me.Width = Region.Width
@@ -32,6 +35,23 @@ Namespace Global.Nukepayload2.Graphics.N2Engine
         ''' </summary>
         <N2DesignerVisible>
         Public Property Height!
+    End Class
+    Public MustInherit Class AnimatedBlock2D
+        Inherits AnimatedVisual
+
+    End Class
+    ''' <summary>
+    ''' 特定的静态呈现的方块
+    ''' </summary>
+    ''' <typeparam name="TBrush">方块的呈现方式</typeparam>
+    Public MustInherit Class StaticBlock2D(Of TBrush As ICanvasBrush)
+        Inherits StaticBlock2D
+        Sub New(Region As Rect)
+            MyBase.New(Region)
+        End Sub
+        Sub New(width As Single, height As Single)
+            MyBase.New(width, height)
+        End Sub
         ''' <summary>
         ''' 表示如何填充这个方块。创建绘制资源的时候才会创建它。
         ''' </summary>
